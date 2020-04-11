@@ -1,0 +1,445 @@
+body {
+  margin: 0;
+}
+.logokink2 {
+  display: flex;
+  flex-direction: row;
+  /* flex-direction: column; */
+}
+.firstnlogo {
+  color: white;
+  /* text-decoration: none; */
+
+  font-size: 25px;
+  margin: 0;
+  margin-left: 50px;
+}
+.firstnlogo:hover {
+  color: #17a2b8;
+}
+.firstnlogo:hover ~ .slashnlogo {
+  color: #17a2b8;
+}
+
+.firstnlogo:hover ~ .secnlogo {
+  color: white;
+}
+
+.slashnlogo {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+.slashnlogo2 {
+  color: #17a2b8;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0 6px;
+}
+.lastitemlog {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+.slashnlogo:hover {
+  color: #17a2b8;
+}
+.firstdivreverse {
+  display: flex;
+  flex-direction: row-reverse;
+  /* margin: 0; */
+}
+.secnlogo {
+  color: #17a2b8;
+  font-size: 25px;
+  font-weight: bold;
+}
+.secnlogo:hover {
+  color: white;
+}
+
+.secnlogo:hover ~ .firstnlogo {
+  color: #17a2b8;
+}
+.secnlogo:hover ~ .slashnlogo {
+  color: #17a2b8;
+}
+
+.slashnlogo2:hover ~ .secnlogo {
+  color: white;
+}
+.slashnlogo2:hover ~ .firstnlogo {
+  color: #17a2b8;
+}
+
+.lastitemlog:hover {
+  color: white;
+}
+
+.lastitemlog:hover ~ .firstnlogo {
+  color: #17a2b8;
+}
+.lastitemlog:hover ~ .slashnlogo2 {
+  color: #17a2b8;
+}
+
+.lastitemlog:hover ~ .secnlogo {
+  color: white;
+}
+
+.mynavvbar {
+  z-index: 1;
+  opacity: 0.9;
+  display: flex;
+  justify-content: space-between;
+  background-color: #34393f;
+  padding: 20px;
+  width: 100%;
+  top: 0px;
+  position: fixed;
+  border-bottom: #17a2b8 1px solid;
+}
+.listnavbar {
+  display: flex;
+  margin: 0 50px;
+}
+.linknav {
+  color: white;
+  padding: 0 30px;
+  font-size: 19px;
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+.linknav:hover {
+  color: aqua;
+}
+.homecontainer {
+  position: relative;
+}
+.backgroundimage {
+  position: absolute;
+
+  height: 654px;
+}
+.textcontainer {
+  font-size: 50px;
+  position: absolute;
+  top: 130px;
+  left: 50px;
+  color: white;
+}
+.boutton-container-log {
+  position: relative;
+  align-items: center;
+  display: flex;
+  z-index: 1;
+  justify-content: center;
+  top: 400px;
+}
+.boutton-log {
+  padding: 15px 30px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+}
+.signupbut {
+  background-color: #17a2b8;
+  color: white;
+}
+.boutton-log:hover {
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  transform: translateY(-7px);
+}
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.myinput {
+  padding: 8px 40px;
+  margin: 5px 10px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+  -moz-box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+  box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+}
+.typeuser {
+  padding: 8px 87px;
+  margin: 5px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+  -moz-box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+  box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+}
+.birthday {
+  padding: 6px 55px;
+  margin: 5px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+  -moz-box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+  box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+}
+.alert {
+  padding: 10px 80px;
+  border-radius: 5px;
+}
+.logout {
+  margin: 0 30px 2px 8px;
+}
+.alert-danger {
+  border: solid 1px;
+  background-color: #ca4444;
+  color: white;
+  margin: 0 400px;
+}
+
+.alert-0 {
+  margin-top: 70px;
+}
+.alert-success {
+  background-color: green;
+  color: white;
+  position: absolute;
+  margin: 70px;
+  width: 78%;
+  top: 650px;
+}
+.submitcreatepro {
+  padding: 8px 101px;
+  margin: 5px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+  -moz-box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+  box-shadow: 0px 5px 13px 0px rgba(107, 130, 125, 1);
+}
+.submitcreatepro:hover {
+  background-color: #17a2b8;
+  color: white;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  transform: translateY(-7px);
+}
+
+.signuplogo {
+  font-size: 60px;
+  text-align: center;
+  color: #17a2b8;
+  margin: 70px 0 0 0;
+  /* margin-left: 50px; */
+}
+.create-pro {
+  display: flex;
+  justify-content: center;
+}
+.paragraphe-create-pro {
+  font-size: 27px;
+  margin: 10px 0;
+  color: #393333;
+}
+.faUser {
+  /* margin: 10px 0; */
+  font-size: 20px;
+  padding: 0 7px 0;
+  color: white;
+}
+.logbor {
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+  margin: 90px 0;
+  padding: 0 20px 50px 20px;
+  opacity: 0.9;
+  background-color: white;
+}
+.bodyregister {
+  display: flex;
+  justify-content: center;
+}
+.dashbordbuttonedi {
+  padding: 10px 50px;
+  background-color: #f4f4f4;
+  color: black;
+  margin: 20px 10px;
+  border-radius: 5px;
+}
+.firstbuttdashhas {
+  margin-left: 70px;
+}
+.faUserCircle {
+  margin: 0 7px;
+  font-size: 17px;
+  color: #17a2b8;
+}
+.faBlackTie {
+  margin: 0 7px;
+  font-size: 17px;
+  color: #17a2b8;
+}
+.faGraduationCap {
+  margin: 0 7px;
+  font-size: 17px;
+  color: #17a2b8;
+}
+.formsignupreg {
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 90px 0;
+  padding: 0 40px 50px;
+  opacity: 0.9;
+}
+.footerhome {
+  text-align: center;
+  color: #3c5673;
+}
+.spansign {
+  color: blue;
+  text-decoration: none;
+}
+.spansign:hover {
+  text-decoration: none;
+  color: red;
+}
+.spansign:active {
+  color: blue;
+  text-decoration: none;
+}
+.spansign:link {
+  color: blue;
+  text-decoration: none;
+}
+.stype-dash-title {
+  color: #17a2b8;
+  font-size: 40px;
+  margin: 100px 0 0 70px;
+}
+.titlecreateprofile {
+  color: #17a2b8;
+  font-size: 50px;
+  margin: 70px 0 0 70px;
+}
+.praracreateprofile {
+  font-size: 25px;
+  margin: 20px 0 15px 70px;
+}
+.faUsertitle2 {
+  margin: 0 5px 0 0;
+}
+.requireinput {
+  font-size: 20px;
+  margin: 10px 0 0 70px;
+  color: #888;
+}
+.welcome-Title {
+  font-size: 30px;
+  margin: 30px 0 0 70px;
+}
+.faUsertitle {
+  margin: 0 8px 0 0;
+  color: black;
+}
+.PrographeNoProfile {
+  margin: 30px 0 0 70px;
+}
+.buttonCreateProfile {
+  padding: 13px 24px;
+  border-radius: 4px;
+  background-color: #17a2b8;
+  color: white;
+  margin: 30px 0 0 70px;
+}
+.buttonCreateProfile:hover {
+  -webkit-box-shadow: 0px 17px 22px -13px rgba(23, 163, 184, 1);
+  -moz-box-shadow: 0px 17px 22px -13px rgba(23, 163, 184, 1);
+  box-shadow: 0px 17px 22px -13px rgba(23, 163, 184, 1);
+  cursor: pointer;
+}
+.formprofilecreate {
+  display: flex;
+  flex-direction: column;
+}
+.formprofilecreate:first-child {
+  margin-top: 40px;
+}
+.myinputCreateProfile {
+  margin: 5px 70px 0 70px;
+  padding: 8px 10px;
+  -webkit-box-shadow: 1px 5px 18px 0px rgba(181, 179, 181, 1);
+  -moz-box-shadow: 1px 5px 18px 0px rgba(181, 179, 181, 1);
+  box-shadow: 1px 5px 18px 0px rgba(181, 179, 181, 1);
+  border-radius: 5px;
+}
+.infocreateprof {
+  margin: 7px 0 10px 70px;
+  color: #888;
+}
+.social {
+  margin-left: 70px;
+  display: flex;
+  flex-direction: row;
+}
+.faFacebook {
+  color: #4267b2;
+  font-size: 50px;
+}
+.faYoutube {
+  color: red;
+  font-size: 50px;
+}
+.faLinkdin {
+  font-size: 50px;
+}
+.faTwitter {
+  font-size: 44px;
+  color: rgba(29, 161, 242, 1);
+}
+.faInstagram {
+  font-size: 50px;
+  color: blue;
+}
+.socialinput {
+  padding: 15px 20px;
+  width: 88%;
+  margin: 0 0 20px 10px;
+  -webkit-box-shadow: 1px 5px 18px 0px rgba(181, 179, 181, 1);
+  -moz-box-shadow: 1px 5px 18px 0px rgba(181, 179, 181, 1);
+  box-shadow: 1px 5px 18px 0px rgba(181, 179, 181, 1);
+  border-radius: 5px;
+}
+.addsoc {
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 70px 900px 40px 100px;
+  background-color: #17a2b8;
+  color: white;
+  width: fixed;
+  width: 220px;
+}
+.buttonSubProfCRE {
+  margin: 5px 70px 0 70px;
+}
+.subprof {
+  padding: 15px 20px;
+  margin-right: 20px;
+  background-color: #17a2b8;
+  color: white;
+}
+.backprof {
+  padding: 15px 20px;
+}
+.mybodylog {
+  display: flex;
+  justify-content: center;
+  /* position: relative; */
+}
+.imageloginn {
+  position: absolute;
+  width: 100%;
+  height: 654px;
+  margin: 0;
+}
