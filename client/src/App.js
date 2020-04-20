@@ -7,6 +7,13 @@ import Dashboard from './Component/dashborad/Dashboard';
 import PrivateRoute from './Component/routing/PrivateRoute';
 import CreateProfile from './Component/porfile-forms/CreateProfile';
 import EditProfile from './Component/porfile-forms/EditProfile';
+import AddEducation from './Component/porfile-forms/AddEducation';
+import AddExperience from './Component/porfile-forms/AddExperience';
+import MyProfile from './Component/porfile/MyProfile';
+import AllProfile from './Component/porfile/Allprofile';
+import ProfilePeople from './Component/porfile/ProfilePeople';
+import Posts from './Component/posts/Posts';
+import Post from './Component/post/Post';
 
 import Login from './Component/auth/Login';
 import './App.css';
@@ -39,11 +46,31 @@ const App = () => {
                 path='/create-profile'
                 component={CreateProfile}
               />
+
               <PrivateRoute
                 exact
                 path='/Edit-profile'
                 component={EditProfile}
               />
+              <PrivateRoute
+                exact
+                path='/add-education'
+                component={AddEducation}
+              />
+              <PrivateRoute
+                exact
+                path='/add-experience'
+                component={AddExperience}
+              />
+              <PrivateRoute exact path='/profile' component={MyProfile} />
+              <PrivateRoute exact path='/profiles' component={AllProfile} />
+              <PrivateRoute
+                exact
+                path='/profiles/:id'
+                component={ProfilePeople}
+              />
+              <PrivateRoute exact path='/home' component={Posts} />
+              <PrivateRoute exact path='/posts/:id' component={Post} />
             </Switch>
           </section>
         </Fragment>

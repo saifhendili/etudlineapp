@@ -16,6 +16,7 @@ import { createProfile, getCurrentProfile } from '../../actions/profile';
 
 const EditProfile = ({
   profile: { profile, loading },
+  auth: { user },
   createProfile,
 
   getCurrentProfile,
@@ -33,6 +34,7 @@ const EditProfile = ({
     linkedin: '',
     youtube: '',
     instagram: '',
+    clicked: false,
   });
   const {
     company,
@@ -46,6 +48,7 @@ const EditProfile = ({
     linkedin,
     youtube,
     instagram,
+    clicked,
   } = formData;
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
   useEffect(() => {
@@ -54,7 +57,7 @@ const EditProfile = ({
       company: loading || !profile.company ? '' : profile.company,
       website: loading || !profile.website ? '' : profile.website,
       location: loading || !profile.location ? '' : profile.location,
-      status: loading || !profile.status ? '' : profile.status,
+      status: loading || !profile.status ? '' : user.typeuser,
       skills: loading || !profile.skills ? '' : profile.skills.join(','),
 
       bio: loading || !profile.bio ? '' : profile.bio,
@@ -71,11 +74,15 @@ const EditProfile = ({
   const onsubmit = (e) => {
     e.preventDefault();
     createProfile(formData, history, true);
+    setFormData({
+      ...formData,
+      clicked: true,
+    });
   };
 
   return (
     <Fragment>
-      <h1 className='titlecreateprofile'>Create Your Profile</h1>
+      <h1 className='titlecreateprofile'>Edit Your Profile</h1>
 
       <p className='praracreateprofile'>
         <FontAwesomeIcon className='faUsertitle2' icon={faUser} />
@@ -88,9 +95,10 @@ const EditProfile = ({
             type='text'
             className='myinputCreateProfile'
             placeholder='Status'
+            disabled
             name='status'
             value={status}
-            onChange={(e) => onChange(e)}
+            // onChange={(e) => onChange(e)}
           />
           <p className='infocreateprof'></p>
           <input
@@ -214,10 +222,12 @@ const EditProfile = ({
             </Fragment>
           )}
           <div className='buttonSubProfCRE'>
-            <button className='subprof'>Submit</button>
+            <button className='subprof butt'>Submit</button>
             <Link to='/dashboard'>
               {' '}
-              <button className='backprof'>Go Back</button>
+              <button className='backprof butt'>
+                {!clicked ? 'Go Back' : 'Got to Dashboard'}
+              </button>
             </Link>
           </div>
         </div>
@@ -233,6 +243,7 @@ EditProfile.propTypes = {
 };
 const mapStateToProfile = (state) => ({
   profile: state.profile,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProfile, { createProfile, getCurrentProfile })(

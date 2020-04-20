@@ -14,12 +14,11 @@ import {
 import { connect } from 'react-redux';
 import { createProfile } from '../../actions/profile';
 
-const CreateProfile = ({ createProfile, history }) => {
+const CreateProfile = ({ auth: { user }, createProfile, history }) => {
   const [formData, setFormData] = useState({
     company: '',
-    website: '',
+    // website: '',
     location: '',
-    status: '',
     skills: '',
     bio: '',
     twitter: '',
@@ -30,9 +29,8 @@ const CreateProfile = ({ createProfile, history }) => {
   });
   const {
     company,
-    website,
+    // website,
     location,
-    status,
     skills,
 
     bio,
@@ -58,7 +56,7 @@ const CreateProfile = ({ createProfile, history }) => {
         <FontAwesomeIcon className='faUsertitle2' icon={faUser} />
         Let's get some information to make your profile stand out
       </p>
-      <p className='requireinput'>* = required field</p>
+      <small className='requireinput'>* = required field</small>
       <form onSubmit={(e) => onsubmit(e)}>
         <div className='formprofilecreate'>
           <input
@@ -66,8 +64,9 @@ const CreateProfile = ({ createProfile, history }) => {
             className='myinputCreateProfile'
             placeholder='Status'
             name='status'
-            value={status}
-            onChange={(e) => onChange(e)}
+            value={user.typeuser}
+            // onChange={(e) => onChange(e)}
+            disabled
           />
           <p className='infocreateprof'></p>
           <input
@@ -88,7 +87,7 @@ const CreateProfile = ({ createProfile, history }) => {
             value={location}
           />
           <p className='infocreateprof'>City suggested (eg. tunis )</p>
-          <input
+          {/* <input
             type='text'
             onChange={(e) => onChange(e)}
             className='myinputCreateProfile'
@@ -98,7 +97,7 @@ const CreateProfile = ({ createProfile, history }) => {
           />
           <p className='infocreateprof'>
             Could be your own or a company website
-          </p>
+          </p> */}
 
           <input
             type='text'
@@ -121,12 +120,12 @@ const CreateProfile = ({ createProfile, history }) => {
             value={bio}
           />
           <p className='infocreateprof'>Tell us a little about yourself</p>
-          <button
+          <div
             className='addsoc'
             onClick={() => toggleSocialInputs(!displaySocialInputs)}
           >
             Add Social Network Links{' '}
-          </button>
+          </div>
           {displaySocialInputs && (
             <Fragment>
               {' '}
@@ -191,10 +190,11 @@ const CreateProfile = ({ createProfile, history }) => {
             </Fragment>
           )}
           <div className='buttonSubProfCRE'>
-            <button className='subprof'>Submit</button>
+            <button className='subprof butt'>Submit</button>
+
             <Link to='/dashboard'>
               {' '}
-              <button className='backprof'>Go Back</button>
+              <button className='backprof butt'>Go Back</button>
             </Link>
           </div>
         </div>
@@ -206,5 +206,9 @@ const CreateProfile = ({ createProfile, history }) => {
 CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
 };
-
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+const mapStateToProfile = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProfile, { createProfile })(
+  withRouter(CreateProfile)
+);

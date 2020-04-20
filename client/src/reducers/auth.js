@@ -6,7 +6,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  // ACCOUNT_DELETED
+  SEND_REQUEST,
+  FRIEND_REQUEST,
+  ACCOUNT_DELETED,
 } from '../actions/Types';
 
 const initialState = {

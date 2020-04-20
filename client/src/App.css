@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #e9ebee;
 }
 .logokink2 {
   display: flex;
@@ -86,6 +87,9 @@ body {
 .lastitemlog:hover ~ .secnlogo {
   color: white;
 }
+.logokink {
+  margin: 0;
+}
 
 .mynavvbar {
   z-index: 1;
@@ -101,12 +105,12 @@ body {
 }
 .listnavbar {
   display: flex;
-  margin: 0 50px;
+  margin: 0 20px;
 }
 .linknav {
   color: white;
-  padding: 0 30px;
-  font-size: 19px;
+  padding: 0 10px;
+  font-size: 17px;
   text-decoration: none;
 }
 li {
@@ -142,7 +146,7 @@ li {
   padding: 15px 30px;
   margin: 5px;
   cursor: pointer;
-  border-radius: 45px;
+  border-radius: 50%;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
 }
@@ -191,13 +195,32 @@ li {
 .logout {
   margin: 0 30px 2px 8px;
 }
+.alert-danger2 {
+  border: solid 1px;
+  background-color: #ca4444;
+  color: white;
+  position: absolute;
+  margin: 70px;
+  width: 78%;
+  top: 650px;
+}
 .alert-danger {
   border: solid 1px;
   background-color: #ca4444;
   color: white;
   margin: 0 400px;
 }
+.alert-danger3 {
+  width: 78%;
+  border: solid 1px;
+  background-color: #ca4444;
+  color: white;
+  /* position: absolute; */
+  margin: 0 70px;
+  position: relative;
 
+  top: 800px;
+}
 .alert-0 {
   margin-top: 70px;
 }
@@ -208,6 +231,14 @@ li {
   margin: 70px;
   width: 78%;
   top: 650px;
+}
+.alert-success2 {
+  background-color: green;
+  color: white;
+  position: absolute;
+  margin: 70px;
+  width: 78%;
+  top: 590px;
 }
 .submitcreatepro {
   padding: 8px 101px;
@@ -260,6 +291,7 @@ li {
   justify-content: center;
 }
 .dashbordbuttonedi {
+  cursor: pointer;
   padding: 10px 50px;
   background-color: #f4f4f4;
   color: black;
@@ -442,4 +474,346 @@ li {
   width: 100%;
   height: 654px;
   margin: 0;
+}
+.butt {
+  border-radius: 5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.buttsubeduca {
+  margin: 180px 30px 10px 70px;
+}
+.my-2 {
+  margin: 2rem 70px;
+}
+.table {
+  margin: 2rem 70px;
+}
+.hide-sm {
+  background-color: white;
+  color: black;
+  width: 150px;
+  padding: 25px 40px;
+}
+.info-table {
+  width: 100px;
+  padding: 25px 40px;
+}
+.info-table-date {
+  display: flex;
+  flex-direction: row;
+  padding: 15px 40px;
+}
+.btn-danger {
+  padding: 15px 30px;
+  margin: 5px;
+  background-color: #dc3545;
+  color: white;
+}
+.btn-danger:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.spacee {
+  background-color: white;
+  color: black;
+  width: 20px;
+  /* padding: 15px 30px; */
+}
+.myProfile {
+  display: flex;
+
+  flex-direction: column;
+}
+.photo-de-profile {
+  width: 190px;
+  margin: 20px 0 10px 0;
+  border-radius: 50%;
+}
+.pdpandname {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+}
+.header {
+  /* border: white solid 1px; */
+  margin: 100px 30px 0;
+  padding-bottom: 15px;
+  /* background-color: white; */
+}
+.myname {
+  margin: 0 0 0 0;
+  font-size: 45px;
+  font-weight: bold;
+  color: white;
+}
+.positin-button-action-profile {
+  margin: 200px 20px 0 20px;
+}
+.social-profile {
+  display: flex;
+  flex-direction: row;
+
+  margin: 80px 0 0 13px;
+
+  width: 280px;
+  justify-content: center;
+}
+
+.space-social {
+  margin-right: 10px;
+}
+.box-education {
+  opacity: 0.9;
+  flex: 1;
+  border: solid 1px white;
+  width: 30%;
+  height: 192px;
+  margin: 10px 30px 0 10px;
+  border-radius: 5px;
+  background-color: white;
+}
+.educview {
+  display: flex;
+  flex-direction: row;
+}
+.espacebox {
+  margin: 10px 15px;
+}
+.butteditprofile {
+  width: 100%;
+  padding: 10px 15px;
+  cursor: pointer;
+
+  background-color: #f4f4f4;
+  color: black;
+
+  border-radius: 5px;
+}
+.essspace {
+  margin-left: 5px;
+}
+.search-input {
+  padding: 9px;
+  margin: 0;
+  /* border-radius: 5px; */
+}
+.myformsearchinput {
+  display: flex;
+  flex-direction: row;
+}
+.navbarlogin {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.addbut {
+  color: blue;
+  text-decoration: none;
+}
+.addbut:hover {
+  color: red;
+}
+.iconsearch {
+  margin: 0 50px 0 0;
+  color: grey;
+  font-size: 17px;
+  padding: 7px 7px;
+  background-color: #f5f6f7;
+}
+.iconsearch:hover {
+  background-color: #4080ff;
+  color: white;
+  cursor: pointer;
+}
+.profile {
+  border: solid white 1px;
+  margin: 50px 70px;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 5px;
+  justify-content: space-between;
+}
+.squard-img {
+  height: 70px;
+  width: 70px;
+  margin: 20px 10px 20px 30px;
+  border-radius: 50%;
+}
+.name-send-req {
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+.butteditprofile:hover {
+  background-color: #4267b2;
+  color: white;
+}
+.typeusers {
+  margin: 0;
+  font-weight: bold;
+  text-decoration: underline;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.firstpart-req {
+  margin-top: 5px;
+}
+.view-profile {
+  background-color: #f4f4f4;
+  padding: 10px 40px;
+  margin: 35px 100px 35px 0;
+  border-radius: 5px;
+}
+.info-viewprof {
+  display: flex;
+  flex-direction: row;
+}
+.name-send-req:hover {
+  color: #4080ff;
+  cursor: pointer;
+}
+.view-profile:hover {
+  background-color: #4080ff;
+  color: white;
+  cursor: pointer;
+}
+.searchforpreople {
+  margin: 100px 200px;
+  color: #17a2b8;
+  font-size: 40px;
+}
+.linksmpl {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.back-prof {
+  position: absolute;
+  z-index: -1;
+  top: 100px;
+  width: 1287px;
+  height: 416px;
+  border-radius: 7px;
+}
+.pos {
+  margin: 0 0 0 0;
+}
+.post {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 70px;
+  border: solid white 1px;
+  background-color: white;
+  border-radius: 7px;
+}
+.post-icon {
+  display: flex;
+  flex-direction: row;
+}
+.name-post {
+  margin: 30px 0 0 0;
+}
+.my-1 {
+  margin: 50px 30px;
+}
+.infopost {
+  display: flex;
+  flex-direction: column;
+}
+.post-date {
+  margin-left: 110px;
+  margin-top: -40px;
+}
+.squard-img2 {
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  margin: 20px 10px 0 30px;
+}
+.buttpost {
+  display: flex;
+  flex-direction: column;
+}
+.listbuttpost {
+  display: flex;
+  flex-direction: row;
+  margin: 0 10px;
+}
+.post-title {
+  margin: 10px 70px;
+  font-size: 35px;
+  font-weight: bold;
+}
+.btn-post {
+  padding: 5px 20px;
+  background-color: #f4f4f4;
+  margin: 5px;
+}
+.lead {
+  margin: 90px 0 10px 70px;
+  font-size: 30px;
+}
+.post-title {
+  background-color: #17a2b8;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+.create-post {
+  margin: 0 40px 0 70px;
+  width: 89%;
+}
+.post-form {
+  display: flex;
+  flex-direction: column;
+}
+.btn-sub {
+  background-color: #6aafff;
+  color: white;
+  margin: 10px 0 10px 35px;
+  width: 200px;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+.header-row {
+  display: flex;
+  flex-direction: row;
+}
+.bg-leave-comment {
+  background-color: #17a2b8;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 10px 70px;
+  font-size: 35px;
+  font-weight: bold;
+}
+.form-comment {
+  margin: 0 70px;
+  display: flex;
+  flex-direction: column;
+}
+.btn-sub:hover {
+  background-color: #17a2b8;
+  cursor: pointer;
+}
+.btn-delete {
+  height: 50px;
+  width: 100px !important;
+}
+.delete-ppost {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.btn-comments {
+  margin: 0 15px;
+  padding: 10px 15px;
+  background-color: #17a2b8;
+  color: white;
+  text-decoration: none;
 }
