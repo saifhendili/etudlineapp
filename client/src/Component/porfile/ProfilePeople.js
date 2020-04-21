@@ -15,19 +15,26 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import Spinner from '../Layout/Spinner';
 import img from '../../image/univer.jpg';
-
+import { GetSendreq, getreqfriend } from '../../actions/friends';
 import { getProfileById } from '../../actions/profile';
 
 const PrifilePeople = ({
   getProfileById,
+  GetSendreq,
+  getreqfriend,
   profile: { profile, loading },
   auth: { user, isAuthenticated },
   match,
+  // sendrequest: { sentRequests, _id },
+  friends: { sendrequest, friendrequest },
 }) => {
   const nullProfile = !profile;
+
   useEffect(() => {
     getProfileById(match.params.id);
-  }, [getProfileById]);
+    GetSendreq(match.params.id);
+    getreqfriend(match.params.id);
+  }, [getProfileById, GetSendreq, getreqfriend]);
 
   return (
     <Fragment>
@@ -57,7 +64,14 @@ const PrifilePeople = ({
                       <h3 className='myname'>
                         {profile.user.firstname} {profile.user.lastname}
                       </h3>
-                      <SendRequest id={match.params.id} />
+
+                      {/* <h1>{_id}</h1> */}
+                      {sendrequest.map((el, i) => (
+                        <div>
+                          <SendRequest id={match.params.id} sentRequests={el} />
+                        </div>
+                      ))}
+
                       {!profile.social ? (
                         <Fragment>
                           {' '}
@@ -148,11 +162,20 @@ PrifilePeople.propTypes = {
   getProfileById: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  GetSendreq: PropTypes.func.isRequired,
+  getreqfriend: PropTypes.func.isRequired,
+  friends: PropTypes.object.isRequired,
+  // sentRequests: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   profile: state.profile,
   auth: state.auth,
+  friends: state.friends,
 });
 
-export default connect(mapStateToProps, { getProfileById })(PrifilePeople);
+export default connect(mapStateToProps, {
+  getProfileById,
+  GetSendreq,
+  getreqfriend,
+})(PrifilePeople);

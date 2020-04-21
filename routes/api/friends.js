@@ -3,7 +3,6 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
-const Post = require('../../models/Post');
 const User = require('../../models/User');
 
 // @route    GET api/posts
@@ -42,6 +41,26 @@ router.post('/sendfriendrequest/:id', auth, async (req, res) => {
 });
 module.exports = router;
 
+router.get('/getreq/:id', auth, async (req, res) => {
+  try {
+    const me = await User.findById(req.user.id);
+    // const frienduser = await User.findById(req.params.id).select(
+    //   'friendRequests'
+    // );
+    res.json(me.sentRequests);
+  } catch (error) {
+    console.log(error);
+  }
+});
+router.get('/getreqfriend/:id', auth, async (req, res) => {
+  try {
+    // const me = await User.findById(req.user.id).select('sentRequests');
+    const frienduser = await User.findById(req.params.id);
+    res.json(frienduser.friendRequests);
+  } catch (error) {
+    console.log(error);
+  }
+});
 router.post('/friendrequest/:id', auth, async (req, res) => {
   try {
     const me = await User.findById(req.user.id);

@@ -1,32 +1,45 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { SSendRequest, FriendRequest } from '../../actions/friends';
+import {
+  SSendRequest,
+  FriendRequest,
+  GetSendreq,
+  getreqfriend,
+} from '../../actions/friends';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-const SendRequest = ({ id, SSendRequest, FriendRequest }) => {
+const SendRequest = ({
+  id,
+  sentRequests,
+  SSendRequest,
+  FriendRequest,
+  
+  // friends: { sendrequest, friendrequest },
+}) => {
   const [red, HandelMouseClick] = useState({ friend: false });
   const { friend } = red;
   const SetItem = () => {
     HandelMouseClick({ ...red, friend: !friend });
   };
   const onsub = (e) => {
-    // e.preventDefault();
     SSendRequest(id);
     FriendRequest(id);
-    SetItem();
+    // window.location.reload(false);
   };
+
   // if (friend) {
   // }
   return (
     <Fragment>
-      {/* <h1>{id}</h1> */}
-      {/* <Redirect to=''/> */}
-      
-      <Link to={`/profiles/${id}`}>
-        {' '}
-        <button onClick={(e) => onsub(e)}>Send Request</button>
-      </Link>
+      {sentRequests.user === id ? (
+        <button>Delete Request</button>
+      ) : (
+        <Link to={`/profiles/${id}`}>
+          {' '}
+          <button onClick={(e) => onsub(e)}>Send Request</button>
+        </Link>
+      )}
     </Fragment>
   );
 };
@@ -34,6 +47,16 @@ const SendRequest = ({ id, SSendRequest, FriendRequest }) => {
 SendRequest.propTypes = {
   SSendRequest: PropTypes.func.isRequired,
   FriendRequest: PropTypes.func.isRequired,
+  GetSendreq: PropTypes.func.isRequired,
+  getreqfriend: PropTypes.func.isRequired,
+  sentRequests: PropTypes.object.isRequired,
 };
-
-export default connect(null, { SSendRequest, FriendRequest })(SendRequest);
+// const mapStateToProps = (state) => ({
+//   friends: state.friends,
+// });
+export default connect(null, {
+  SSendRequest,
+  FriendRequest,
+  GetSendreq,
+  getreqfriend,
+})(SendRequest);

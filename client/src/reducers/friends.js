@@ -1,14 +1,8 @@
 import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
+  GET_REQUESTFRIEND,
   SEND_REQUEST,
   FRIEND_REQUEST,
-  ACCOUNT_DELETED,
+  GET_SENDREQUEST,
 } from '../actions/Types';
 
 const initialState = {
@@ -29,7 +23,16 @@ export default function (state = initialState, action) {
         ...state,
         friendrequest: payload,
       };
-
+    case GET_SENDREQUEST:
+      return {
+        ...state,
+        sendrequest: payload,
+      };
+    case GET_REQUESTFRIEND:
+      return {
+        ...state,
+        friendrequest: payload,
+      };
     default:
       return state;
   }
