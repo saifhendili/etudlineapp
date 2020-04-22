@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -12,12 +12,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import Logo from './logo';
+import Notification from '../notification/Notification';
 import { getsearch } from '../../actions/profile';
+import { getProfileById } from '../../actions/profile';
 
 function Navbar({
-  auth: { isAuthenticated, loading },
+  auth: { isAuthenticated, loading, user },
   logout,
-  profile: { search },
+
+  profile: { search, profile },
   getsearch,
 }) {
   const handleChange = (e) => {
@@ -27,6 +30,12 @@ function Navbar({
   const authLinks = (
     <div className='navbarlogin'>
       <ul className='listnavbar'>
+        {profile === null || loading ? (
+          <Fragment></Fragment>
+        ) : (
+          <Notification id={profile.user._id} />
+        )}
+
         <li>
           <form className='myformsearchinput'>
             <input
@@ -103,6 +112,7 @@ function Navbar({
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  getProfileById: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

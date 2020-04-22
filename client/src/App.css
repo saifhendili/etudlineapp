@@ -605,6 +605,7 @@ li {
 .myformsearchinput {
   display: flex;
   flex-direction: row;
+  margin-left: 200px;
 }
 .navbarlogin {
   display: flex;
@@ -816,4 +817,56 @@ li {
   background-color: #17a2b8;
   color: white;
   text-decoration: none;
+}
+.faEnvelopeOpenText {
+  font-size: 25px;
+  color: white;
+  cursor: pointer;
+}
+.notif {
+  position: absolute;
+}
+.dropdown {
+  display: none;
+  border: solid black 1px;
+  padding: 0;
+  background-color: white;
+  width: 30vw;
+  height: 80vh;
+  overflow: scroll;
+  position: absolute;
+  left: -70px;
+}
+.notif:hover .dropdown {
+  display: block;
+}
+.avatarnotif {
+  width: 50px;
+  margin: 0 10px 0 0;
+  padding: 0;
+}
+.friendreqqq {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 20px;
+  /* border-bottom: grey solid 1px; */
+}
+.firstnamefriendreq {
+  margin-right: 10px;
+  font-size: 20px;
+}
+.friendreqqq2 {
+  display: flex;
+  flex-direction: column;
+  border-bottom: grey solid 1px;
+}
+.buttfredreq {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  margin: 50px 0 0 80px;
+
+  /* left: 118px;
+  top: 48px; */
 }

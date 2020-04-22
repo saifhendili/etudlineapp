@@ -3,11 +3,10 @@ import { Link, Redirect } from 'react-router-dom';
 import Spinner from '../Layout/Spinner';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getProfileById } from '../../actions/profile';
-import DashboardActions from '../dashborad/DashboardActions';
+// import { getProfileById } from '../../actions/profile';
+// import DashboardActions from '../dashborad/DashboardActions';
 import Educationbox from './Education';
 import Experienceboc from '../porfile/Experience';
-import User from './User';
 import img from '../../image/univer.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -18,9 +17,7 @@ import {
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 const Profile = ({
-  getProfileById,
   profile: { profile, loading },
-
   auth: { user },
 }) => {
   return (
@@ -136,9 +133,11 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 Profile.propTypes = {
-  getProfileById: PropTypes.func.isRequired,
+  // getProfileById: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, { getProfileById })(Profile);
+export default connect(mapStateToProps, {
+  // getProfileById
+})(Profile);

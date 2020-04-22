@@ -5,6 +5,11 @@ import {
   FRIEND_REQUEST,
   GET_SENDREQUEST,
   GET_REQUESTFRIEND,
+  DELETE_REQUESTFRIEND,
+  DELETE_SENDREQUEST,
+  REJECT_REQUESTFRIEND,
+  REJECT_SENDREQUESTFRIEND,
+  ACCEPT_FRIEND,
 } from './Types';
 export const SSendRequest = (id) => async (dispatch) => {
   try {
@@ -44,6 +49,64 @@ export const getreqfriend = (id) => async (dispatch) => {
     const res = await axios.get(`/api/friends/getreqfriend/${id}`);
     dispatch({
       type: GET_REQUESTFRIEND,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const Deletesendreq = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/friends/deletesendreq/${id}`);
+    dispatch({
+      type: DELETE_SENDREQUEST,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const Deleterequest = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/friends/deletereq/${id}`);
+    dispatch({
+      type: DELETE_REQUESTFRIEND,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const RejectRequest = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/friends/rejectreq/${id}`);
+    dispatch({
+      type: REJECT_REQUESTFRIEND,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const RejectSendRequest = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/friends/rejectsendreq/${id}`);
+    dispatch({
+      type: REJECT_SENDREQUESTFRIEND,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const Accept_Friends = (id) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/api/friends/acceptfriend/${id}`);
+    dispatch({
+      type: ACCEPT_FRIEND,
       payload: res.data,
     });
   } catch (error) {

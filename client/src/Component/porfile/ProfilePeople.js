@@ -5,6 +5,7 @@ import Educationbox from './Education';
 import { connect } from 'react-redux';
 import Experienceboc from '../porfile/Experience';
 import SendRequest from './SendRequest';
+import Deletereq from './Deletereq';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebookSquare,
@@ -29,7 +30,7 @@ const PrifilePeople = ({
   friends: { sendrequest, friendrequest },
 }) => {
   const nullProfile = !profile;
-
+  let bool = false;
   useEffect(() => {
     getProfileById(match.params.id);
     GetSendreq(match.params.id);
@@ -66,11 +67,22 @@ const PrifilePeople = ({
                       </h3>
 
                       {/* <h1>{_id}</h1> */}
-                      {sendrequest.map((el, i) => (
-                        <div>
-                          <SendRequest id={match.params.id} sentRequests={el} />
-                        </div>
-                      ))}
+                      <Fragment>
+                        {sendrequest.map((el, i) => (
+                          <div>
+                            {el.user.includes(match.params.id) ? (
+                              (bool = true)
+                            ) : (
+                              <Fragment></Fragment>
+                            )}
+                          </div>
+                        ))}
+                        {bool === false ? (
+                          <SendRequest id={match.params.id} />
+                        ) : (
+                          <Deletereq id={match.params.id} />
+                        )}
+                      </Fragment>
 
                       {!profile.social ? (
                         <Fragment>

@@ -41,19 +41,19 @@ const UserSchema = new mongoose.Schema({
     type: [
       { firstname: String, lastname: String, avatar: String, user: String },
     ],
-    default: [],
+    default: [{ firstname: '', lastname: '', avatar: '', user: '' }],
   },
   friendRequests: {
     type: [
       { firstname: String, lastname: String, avatar: String, user: String },
     ],
-    default: [],
+    default: [{ firstname: '', lastname: '', avatar: '', user: '' }],
   },
   sentRequests: {
     type: [
       { firstname: String, lastname: String, avatar: String, user: String },
     ],
-    default: [],
+    default: [{ firstname: '', lastname: '', avatar: '', user: '' }],
   },
 });
 
