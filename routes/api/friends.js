@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
-
+let mongoose = require('mongoose');
 const User = require('../../models/User');
 
 //get send request friend
@@ -36,6 +35,7 @@ router.post('/sendfriendrequest/:id', auth, async (req, res) => {
       lastname: frienduser.lastname,
       avatar: frienduser.avatar,
       user: frienduser.id,
+      myuser: me.id,
     };
 
     me.sentRequests.unshift(newRequest);
@@ -57,6 +57,7 @@ router.post('/friendrequest/:id', auth, async (req, res) => {
       lastname: me.lastname,
       avatar: me.avatar,
       user: me.id,
+      myuser: frienduser.id,
     };
 
     frienduser.friendRequests.unshift(newsentRequests);
@@ -135,7 +136,7 @@ router.delete('/deletefriend/:id', auth, async (req, res) => {
     await frienduser.save();
     await me.save();
 
-    res.json(me);
+    res.json(me.friends);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -190,21 +191,49 @@ router.post('/acceptfriend/:id', auth, async (req, res) => {
     const me = await User.findById(req.user.id);
     const frienduser = await User.findById(req.params.id);
 
-    const newRequest = {
+    const mynewchat = await {
+      myid: me.id,
+      userid: frienduser.id,
+      chatid: mongoose.Types.ObjectId(),
+    };
+    const newchatfriend = await {
+      myid: frienduser.id,
+      userid: me.id,
+      chatid: mynewchat.chatid,
+    };
+    await me.chat.unshift(mynewchat);
+    await frienduser.chat.unshift(newchatfriend);
+    let chatidd;
+
+    await me.chat.map((el, i) => {
+      el.userid == frienduser.id ? (chatidd = el.chatid) : null;
+    });
+
+    // let chatiduser = '';
+
+    // await frienduser.chat.map((el, i) => {
+    //   el.userid == me.id ? (chatiduser = el.chatid) : null;
+    // });
+
+    const newRequest = await {
       firstname: frienduser.firstname,
       lastname: frienduser.lastname,
       avatar: frienduser.avatar,
       user: frienduser.id,
+      myuser: me.id,
+      chatid: chatidd,
     };
-    const newsentRequests = {
+    const newsentRequests = await {
       firstname: me.firstname,
       lastname: me.lastname,
       avatar: me.avatar,
       user: me.id,
+      myuser: frienduser.id,
+      chatid: chatidd,
     };
 
-    frienduser.friends.unshift(newsentRequests);
-    me.friends.unshift(newRequest);
+    await frienduser.friends.unshift(newsentRequests);
+    await me.friends.unshift(newRequest);
 
     me.friendRequests = me.friendRequests.filter(
       (user) => user.user !== newRequest.user
@@ -222,3 +251,29 @@ router.post('/acceptfriend/:id', auth, async (req, res) => {
   }
 });
 module.exports = router;
+
+router.get('/getfriends', auth, async (req, res) => {
+  try {
+    const me = await User.findById(req.user.id);
+    res.json(me.friends);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+module.exports = router;
+// router.get('/getchat/:id', auth, async (req, res) => {
+//   try {
+//     const me = await User.findById(req.user.id);
+//     const frienduser = await User.findById(req.params.id);
+//     let my = '';
+//     await frienduser.chat.map((el, i) => {
+//       el.userid == me.id ? (my = el._id) : null;
+//     });
+//     res.json(my);
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).send('Server Error');
+//   }
+// });
+// module.exports = router;

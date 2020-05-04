@@ -14,13 +14,12 @@ import { logout } from '../../actions/auth';
 import Logo from './logo';
 import Notification from '../notification/Notification';
 import { getsearch } from '../../actions/profile';
-import { getProfileById } from '../../actions/profile';
 
 function Navbar({
-  auth: { isAuthenticated, loading, user },
+  auth: { isAuthenticated, loading },
   logout,
 
-  profile: { search, profile },
+  profile: {profile },
   getsearch,
 }) {
   const handleChange = (e) => {
@@ -30,10 +29,11 @@ function Navbar({
   const authLinks = (
     <div className='navbarlogin'>
       <ul className='listnavbar'>
-        {profile === null || loading ? (
-          <Fragment></Fragment>
-        ) : (
-          <Notification id={profile.user._id} />
+        {profile === null || loading ? null : (
+          <li>
+            {' '}
+            <Notification id={profile.user._id} />
+          </li>
         )}
 
         <li>
@@ -55,19 +55,19 @@ function Navbar({
         </li>
         <li>
           <Link to='home' className='linknav'>
-            <FontAwesomeIcon className='faUser' icon={faHome} />
+            <FontAwesomeIcon icon={faHome} />
             Home
           </Link>
         </li>
         <li>
           <Link to='profile' className='linknav'>
-            <FontAwesomeIcon className='faUser' icon={faUser} />
+            <FontAwesomeIcon className='' icon={faUser} />
             Profile
           </Link>
         </li>
         <li>
           <Link to='dashboard' className='linknav'>
-            <FontAwesomeIcon className='faUser' icon={faCog} />
+            <FontAwesomeIcon icon={faCog} />
             Dashboard
           </Link>
         </li>
@@ -112,7 +112,6 @@ function Navbar({
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  getProfileById: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

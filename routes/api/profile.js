@@ -20,6 +20,7 @@ router.get('/me', auth, async (req, res) => {
       'sentRequests',
       'friendRequests',
       'friends',
+      'chat',
     ]);
     if (!profile)
       return res.status(400).json({ msg: 'there in no profile for this user' });

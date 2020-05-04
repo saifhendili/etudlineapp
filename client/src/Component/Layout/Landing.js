@@ -9,7 +9,7 @@ function Landing({ isAuthenticated }) {
     ) return <Redirect to='dashboard' />;
   return (
     <div className='homecontainer'>
-      <img className='backgroundimage' src={pic} width='100%' />
+      <img className='backgroundimage' src={pic} width='100%' alt='background img'/>
       <p className='textcontainer'>
         Create a profile, share posts and get help from other instructor
       </p>

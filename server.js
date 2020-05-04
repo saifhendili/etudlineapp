@@ -1,9 +1,63 @@
-const express = require('express');
 const connectDB = require('./config/db');
+const http = require('http');
+const express = require('express');
+const socketio = require('socket.io');
+// const { getuser } = require('./middleware/chat');
+const cors = require('cors');
+const User = require('./models/User');
+
 const app = express();
+
+const server = http.createServer(app);
+var io = socketio(server);
+
+app.use(cors());
+io.on('connect', (socket) => {
+  console.log('con');
+  socket.on('join', async ({ name, room }, callback) => {
+    console.log('sockets connection ' + name + room);
+    const user = await User.findById(name);
+    console.log(user.firstname);
+    socket.join(room);
+    socket.emit('message', {
+      user: 'admin',
+      text: `${user.firstname}, welcome to room .`,
+    });
+  });
+  socket.on('sendMessage', async ({ message, name, room }, callback) => {
+    const user = await User.findById(name);
+    let userfriend;
+    const newmessage = await {
+      sender: user.firstname,
+      text: message,
+      avatar: user.avatar,
+    };
+    await user.chat.map((el, i) => {
+      {
+        el.chatid === room ? el.messages.push(newmessage) : null;
+      }
+      el.chatid === room ? (userfriend = el.userid) : null;
+    });
+    const friend = await User.findById(userfriend);
+    await friend.chat.map((el, i) => {
+      el.chatid === room ? el.messages.push(newmessage) : null;
+    });
+
+    await user.save();
+    await friend.save();
+    io.to(room).emit('message', {
+      user: user.firstname,
+      text: message,
+      avatar: user.avatar,
+    });
+
+    callback();
+  });
+});
 //Connect Database
 connectDB();
-//Init Middleware
+// //Init Middlew:are
+
 app.use(express.json({ extended: false }));
 app.get('/', (req, res) => res.send('API Running'));
 app.use('/api/users', require('./routes/api/users'));
@@ -11,6 +65,8 @@ app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/friends', require('./routes/api/friends'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/chat', require('./routes/api/chat'));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+server.listen(process.env.PORT || 5000, () =>
+  console.log(`Server has started on.`)
+);

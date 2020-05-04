@@ -3,10 +3,13 @@ import { Link, Redirect } from 'react-router-dom';
 import Spinner from '../Layout/Spinner';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Friend from './Friend';
 // import { getProfileById } from '../../actions/profile';
 // import DashboardActions from '../dashborad/DashboardActions';
 import Educationbox from './Education';
 import Experienceboc from '../porfile/Experience';
+import { GetFriends } from '../../actions/friends';
+import Room from '../chat/FrinedOnline';
 import img from '../../image/univer.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -19,7 +22,13 @@ import {
 const Profile = ({
   profile: { profile, loading },
   auth: { user },
+  GetFriends,
+  friends: { friends },
 }) => {
+  useEffect(() => {
+    GetFriends();
+  }, [GetFriends]);
+
   return (
     <Fragment>
       {profile === null || loading ? (
@@ -37,12 +46,7 @@ const Profile = ({
               <section className='header-row'>
                 <Educationbox />
                 <div className='pdpandname'>
-                  <img
-                    className='photo-de-profile'
-                    src={user.avatar}
-                    alt
-                    logo
-                  />
+                  <img className='photo-de-profile' src={user.avatar} />
                   <h3 className='myname'>
                     {user.firstname} {user.lastname}
                   </h3>
@@ -121,7 +125,14 @@ const Profile = ({
               </section>
             </section>
           </header>
-          <main></main>
+          <main>
+            <section className='friendbox'>
+              <Friend friends={friends} />
+            </section>
+            <section>
+              <Room />
+            </section>
+          </main>
         </Fragment>
       )}
     </Fragment>
@@ -131,13 +142,16 @@ const Profile = ({
 const mapStateToProps = (state) => ({
   auth: state.auth,
   profile: state.profile,
+  friends: state.friends,
 });
 Profile.propTypes = {
   // getProfileById: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  GetFriends: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
   // getProfileById
+  GetFriends,
 })(Profile);

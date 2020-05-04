@@ -14,6 +14,7 @@ import AllProfile from './Component/porfile/Allprofile';
 import ProfilePeople from './Component/porfile/ProfilePeople';
 import Posts from './Component/posts/Posts';
 import Post from './Component/post/Post';
+import Room from './Component/chat/Room';
 
 import Login from './Component/auth/Login';
 import './App.css';
@@ -22,6 +23,7 @@ import store from './store';
 import Alert from './Component/Layout/Alert';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -71,6 +73,7 @@ const App = () => {
               />
               <PrivateRoute exact path='/home' component={Posts} />
               <PrivateRoute exact path='/posts/:id' component={Post} />
+              <PrivateRoute exact path='/chat' component={Room} />
             </Switch>
           </section>
         </Fragment>

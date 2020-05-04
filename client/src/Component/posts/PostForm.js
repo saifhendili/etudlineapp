@@ -39,19 +39,16 @@ const PostForm = ({ addPost }) => {
   return (
     <div>
       <h3 className='post-title'>Create Post</h3>
-      {/* <div onClick={() => handleOpen()}> */}
-        <textarea
-          name='text'
-          cols='30'
-          onClick={() => handleOpen()}
-          rows='5'
-          // style={{ margin: ' 0 40px 0 70px', width: '89%' }}
-          placeholder='Create a post'
-          value={text}
-          // onChange={(e) => onChange(e)}
-          required
-          className='create-post'
-        />
+      <textarea
+        name='text'
+        cols='30'
+        onClick={() => handleOpen()}
+        rows='5'
+        placeholder='Create a post'
+        value={text}
+        required
+        className='create-post'
+      />
       {/* </div> */}
       <Modal
         style={customStyles}

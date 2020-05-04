@@ -5,9 +5,14 @@ import Educationbox from './Education';
 import { connect } from 'react-redux';
 import Experienceboc from '../porfile/Experience';
 import SendRequest from './SendRequest';
+import DeleteFriend from './DeleteFriend';
+import AcceptFriend from '../notification/AcceptFriend';
+
+import RejectFriend from '../notification/RejectFriend';
 import Deletereq from './Deletereq';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faUserPlus,
   faFacebookSquare,
   faLinkedin,
   faYoutubeSquare,
@@ -16,7 +21,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import Spinner from '../Layout/Spinner';
 import img from '../../image/univer.jpg';
-import { GetSendreq, getreqfriend } from '../../actions/friends';
+import { GetSendreq, getreqfriend, GetFriends } from '../../actions/friends';
 import { getProfileById } from '../../actions/profile';
 
 const PrifilePeople = ({
@@ -24,18 +29,21 @@ const PrifilePeople = ({
   GetSendreq,
   getreqfriend,
   profile: { profile, loading },
-  auth: { user, isAuthenticated },
+  auth: { user },
   match,
-  // sendrequest: { sentRequests, _id },
-  friends: { sendrequest, friendrequest },
+  GetFriends,
+  friends: { sendrequest, friendrequest, friends, friendreqnotif },
 }) => {
   const nullProfile = !profile;
   let bool = false;
+  let friendss = false;
+  let sendfr = false;
   useEffect(() => {
+    GetFriends();
     getProfileById(match.params.id);
     GetSendreq(match.params.id);
     getreqfriend(match.params.id);
-  }, [getProfileById, GetSendreq, getreqfriend]);
+  }, [getProfileById, GetSendreq, getreqfriend, GetFriends]);
 
   return (
     <Fragment>
@@ -67,7 +75,27 @@ const PrifilePeople = ({
                       </h3>
 
                       {/* <h1>{_id}</h1> */}
+                      {/* <Fragment> */}
                       <Fragment>
+                        {friendreqnotif.map((el, i) => (
+                          <div>
+                            {user._id == el.myuser ? (
+                              (sendfr = true)
+                            ) : (
+                              <Fragment></Fragment>
+                            )}
+                          </div>
+                        ))}
+                        {friends.map((friend, i) => (
+                          <div>
+                            {friend.user == match.params.id ? (
+                              (friendss = true)
+                            ) : (
+                              <Fragment></Fragment>
+                            )}
+                          </div>
+                        ))}
+                        =
                         {sendrequest.map((el, i) => (
                           <div>
                             {el.user.includes(match.params.id) ? (
@@ -77,22 +105,25 @@ const PrifilePeople = ({
                             )}
                           </div>
                         ))}
-                        {bool === false ? (
-                          <SendRequest id={match.params.id} />
+                        {friendss ? (
+                          <DeleteFriend id={match.params.id} />
+                        ) : sendfr ? (
+                          <div className='buttfredreq'>
+                            <AcceptFriend id={match.params.id} />
+
+                            <RejectFriend id={match.params.id} />
+                          </div>
+                        ) : bool == false ? (
+                          <div className='buttpeoplprof'>
+                            <SendRequest id={match.params.id} />
+                          </div>
                         ) : (
                           <Deletereq id={match.params.id} />
                         )}
                       </Fragment>
 
                       {!profile.social ? (
-                        <Fragment>
-                          {' '}
-                          <Link to='/edit-profile'>
-                            <button className='addsoc pos'>
-                              Add Social Media
-                            </button>
-                          </Link>
-                        </Fragment>
+                        <Fragment></Fragment>
                       ) : (
                         <section className='social-profile'>
                           {profile.social.facebook ? (
@@ -178,6 +209,8 @@ PrifilePeople.propTypes = {
   getreqfriend: PropTypes.func.isRequired,
   friends: PropTypes.object.isRequired,
   // sentRequests: PropTypes.object.isRequired,
+
+  GetFriends: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -190,4 +223,5 @@ export default connect(mapStateToProps, {
   getProfileById,
   GetSendreq,
   getreqfriend,
+  GetFriends,
 })(PrifilePeople);

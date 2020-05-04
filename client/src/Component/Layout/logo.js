@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, {  useState } from 'react';
 
 function Logo() {
   const [sethover, HandelMouseOver] = useState({
@@ -43,11 +43,11 @@ function Logo() {
             <span
               className='slashnlogo2'
               onMouseLeave={() => HandelMouseOver(!ishover2)}
-            >{` / `}</span>
+            >{`/`}</span>
             <span
               className='secnlogo'
               onMouseLeave={() => HandelMouseOver(!ishover1)}
-            >{`Line `}</span>
+            >{`Line`}</span>
             <span className='firstnlogo'>{`<Etud`}</span>
           </div>
 
@@ -63,11 +63,11 @@ function Logo() {
             <span
               className='slashnlogo2'
               onMouseLeave={() => HandelMouseOver(!ishover2)}
-            >{` / `}</span>
+            >{`/`}</span>
             <span
               className='secnlogo'
               onMouseLeave={() => HandelMouseOver(!ishover1)}
-            >{`Line `}</span>
+            >{`Line`}</span>
             <span className='firstnlogo'>{`<Etud`}</span>
           </div>
         </div>
@@ -77,10 +77,10 @@ function Logo() {
             <span
               className='secnlogo'
               onMouseLeave={() => HandelMouseOver(!ishover1)}
-            >{`Line `}</span>
+            >{`Line`}</span>
             <span className='firstnlogo'>{`<Etud`}</span>
           </div>
-          {ishover1 ? <span className='slashnlogo2'>{` / `}</span> : ''}
+          {ishover1 ? <span className='slashnlogo2'>{`/`}</span> : ''}
           {ishover1 ? <span className='lastitemlog'>{`>`}</span> : ''}
         </div>
       )}

@@ -2,29 +2,22 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
-import {
-  GetSendreq,
-  getreqfriend,
-  RejectRequest,
-  RejectSendRequest,
-} from '../../actions/friends';
+import { Getreqfriendnotif, GetFriends } from '../../actions/friends';
 import RejectFriend from './RejectFriend';
 import { connect } from 'react-redux';
-import AcceptFriend from './AcceptFriend'
+import AcceptFriend from './AcceptFriend';
 
 const Notification = ({
-  GetSendreq,
-  getreqfriend,
+  GetFriends,
+  Getreqfriendnotif,
   id,
-  RejectRequest,
-  RejectSendRequest,
-  friends: { sendrequest, friendrequest },
-  profile = { profile },
+  friends: { friendreqnotif },
+  auth: { user },
 }) => {
   useEffect(() => {
-    GetSendreq(id);
-    getreqfriend(id);
-  }, [GetSendreq, getreqfriend]);
+    Getreqfriendnotif(id);
+    GetFriends();
+  }, [Getreqfriendnotif, GetFriends]);
 
   return (
     <div className=''>
@@ -37,33 +30,33 @@ const Notification = ({
           />
           <ul className='dropdown'>
             <li>
-              {friendrequest.map((el, i) => (
-                <ul className='friendreqqq2'>
-                  <div className='friendreqqq'>
-                    <li>
-                      <img src={el.avatar} className='avatarnotif' />
-                    </li>
-                    <li className='firstnamefriendreq'>{el.firstname}</li>
-                    <li className='firstnamefriendreq'>{el.lastname}</li>
-                  </div>
-                  <div className='buttfredreq'>
-                    <li>
-                    {el.firstname == '' ? (
-                        <Fragment></Fragment>
-                      ) : (
-                        <AcceptFriend id={el.user} />
-                      )}
-                    </li>
-                    <li>
-                      {el.firstname == '' ? (
-                        <Fragment></Fragment>
-                      ) : (
-                        <RejectFriend id={el.user} />
-                      )}
-                    </li>
-                  </div>
-                </ul>
-              ))}
+              {friendreqnotif.map((el, i) =>
+                el.myuser === user._id ? (
+                  <Fragment>
+                    <ul key={i} className='friendreqqq2'>
+                      <div className='friendreqqq'>
+                        <li>
+                          <img src={el.avatar} className='avatarnotif' />
+                        </li>
+                        <li className='firstnamefriendreq'>{el.firstname}</li>
+                        <li className='firstnamefriendreq'>{el.lastname}</li>
+                      </div>
+                      <div className='buttfredreq'>
+                        <li>
+                          {el.firstname == '' ? null : (
+                            <AcceptFriend id={el.user} />
+                          )}
+                        </li>
+                        <li>
+                          {el.firstname == '' ? null : (
+                            <RejectFriend id={el.user} />
+                          )}
+                        </li>
+                      </div>
+                    </ul>
+                  </Fragment>
+                ) : null
+              )}
             </li>
           </ul>
         </li>
@@ -73,19 +66,15 @@ const Notification = ({
 };
 
 Notification.propTypes = {
-  GetSendreq: PropTypes.func.isRequired,
-  getreqfriend: PropTypes.func.isRequired,
-  RejectRequest: PropTypes.func.isRequired,
-  RejectSendRequest: PropTypes.func.isRequired,
+  Getreqfriendnotif: PropTypes.func.isRequired,
+  GetFriends: PropTypes.func.isRequired,
 };
 const mapStateTpProps = (state) => ({
   friends: state.friends,
-  profile: state.profile,
+  auth: state.auth,
 });
 
 export default connect(mapStateTpProps, {
-  GetSendreq,
-  getreqfriend,
-  RejectRequest,
-  RejectSendRequest,
+  Getreqfriendnotif,
+  GetFriends,
 })(Notification);

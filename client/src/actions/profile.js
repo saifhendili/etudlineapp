@@ -6,7 +6,6 @@ import {
   GET_PROFILES,
   PROFILE_ERROR,
   UPDATE_PROFILE,
-  CLEAR_PROFILE,
   GET_SEARCH,
 } from './Types';
 export const getsearch = (payload) => (dispatch) => {

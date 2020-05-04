@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SetAlert } from './alert';
+// import { SetAlert } from './alert';
 import {
   SEND_REQUEST,
   FRIEND_REQUEST,
@@ -10,6 +10,9 @@ import {
   REJECT_REQUESTFRIEND,
   REJECT_SENDREQUESTFRIEND,
   ACCEPT_FRIEND,
+  GET_FRIENDS,
+  DELETE_FRIENDS,
+  GETNOTIFICATIONREQ,
 } from './Types';
 export const SSendRequest = (id) => async (dispatch) => {
   try {
@@ -107,6 +110,42 @@ export const Accept_Friends = (id) => async (dispatch) => {
     const res = await axios.post(`/api/friends/acceptfriend/${id}`);
     dispatch({
       type: ACCEPT_FRIEND,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const GetFriends = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/friends/getfriends');
+    dispatch({
+      type: GET_FRIENDS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const DeleteFriends = (id) => async (dispatch) => {
+  try {
+    const res = await axios.delete(`/api/friends/deletefriend/${id}`);
+    dispatch({
+      type: DELETE_FRIENDS,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const Getreqfriendnotif = (id) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/friends/getreqfriend/${id}`);
+    dispatch({
+      type: GETNOTIFICATIONREQ,
       payload: res.data,
     });
   } catch (error) {

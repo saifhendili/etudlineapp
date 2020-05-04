@@ -5,12 +5,9 @@ body {
 .logokink2 {
   display: flex;
   flex-direction: row;
-  /* flex-direction: column; */
 }
 .firstnlogo {
   color: white;
-  /* text-decoration: none; */
-
   font-size: 25px;
   margin: 0;
   margin-left: 50px;
@@ -21,11 +18,9 @@ body {
 .firstnlogo:hover ~ .slashnlogo {
   color: #17a2b8;
 }
-
 .firstnlogo:hover ~ .secnlogo {
   color: white;
 }
-
 .slashnlogo {
   color: white;
   font-size: 25px;
@@ -35,7 +30,6 @@ body {
   color: #17a2b8;
   font-size: 25px;
   font-weight: bold;
-  margin: 0 6px;
 }
 .lastitemlog {
   color: white;
@@ -48,7 +42,6 @@ body {
 .firstdivreverse {
   display: flex;
   flex-direction: row-reverse;
-  /* margin: 0; */
 }
 .secnlogo {
   color: #17a2b8;
@@ -58,39 +51,33 @@ body {
 .secnlogo:hover {
   color: white;
 }
-
 .secnlogo:hover ~ .firstnlogo {
   color: #17a2b8;
 }
 .secnlogo:hover ~ .slashnlogo {
   color: #17a2b8;
 }
-
 .slashnlogo2:hover ~ .secnlogo {
   color: white;
 }
 .slashnlogo2:hover ~ .firstnlogo {
   color: #17a2b8;
 }
-
 .lastitemlog:hover {
   color: white;
 }
-
 .lastitemlog:hover ~ .firstnlogo {
   color: #17a2b8;
 }
 .lastitemlog:hover ~ .slashnlogo2 {
   color: #17a2b8;
 }
-
 .lastitemlog:hover ~ .secnlogo {
   color: white;
 }
 .logokink {
   margin: 0;
 }
-
 .mynavvbar {
   z-index: 1;
   opacity: 0.9;
@@ -215,7 +202,6 @@ li {
   border: solid 1px;
   background-color: #ca4444;
   color: white;
-  /* position: absolute; */
   margin: 0 70px;
   position: relative;
 
@@ -521,7 +507,6 @@ li {
   background-color: white;
   color: black;
   width: 20px;
-  /* padding: 15px 30px; */
 }
 .myProfile {
   display: flex;
@@ -540,10 +525,8 @@ li {
   flex-direction: column;
 }
 .header {
-  /* border: white solid 1px; */
   margin: 100px 30px 0;
   padding-bottom: 15px;
-  /* background-color: white; */
 }
 .myname {
   margin: 0 0 0 0;
@@ -588,10 +571,8 @@ li {
   width: 100%;
   padding: 10px 15px;
   cursor: pointer;
-
   background-color: #f4f4f4;
   color: black;
-
   border-radius: 5px;
 }
 .essspace {
@@ -600,7 +581,6 @@ li {
 .search-input {
   padding: 9px;
   margin: 0;
-  /* border-radius: 5px; */
 }
 .myformsearchinput {
   display: flex;
@@ -699,6 +679,7 @@ li {
   width: 1287px;
   height: 416px;
   border-radius: 7px;
+  left: 31px;
 }
 .pos {
   margin: 0 0 0 0;
@@ -850,7 +831,6 @@ li {
   flex-direction: row;
   margin: 0;
   padding: 20px;
-  /* border-bottom: grey solid 1px; */
 }
 .firstnamefriendreq {
   margin-right: 10px;
@@ -866,7 +846,109 @@ li {
   flex-direction: row;
   position: absolute;
   margin: 50px 0 0 80px;
+}
+.buttpeoplprof {
+  margin: 0 0 20px 0;
+}
+.delteboutt {
+  padding: 7px 10px;
+  margin: 0 0 20px 0;
+}
+.acceptbuttton {
+  padding: 7px 10px;
+  margin: 0 5px 0 0;
+  font-size: 12px !important;
+}
+.friendbox {
+  border: solid 1px white;
+  height: 300px;
+  width: 30%;
+  margin: 0;
+  border-radius: 5px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow: scroll;
+}
+.friend-title {
+  text-decoration: underline;
+  margin-bottom: 15px;
+}
+.avatarfriendbox {
+  border-radius: 50%;
+  width: 40px;
+  margin-right: 10px;
+}
+.onefriend {
+  display: flex;
+  flex-direction: row;
+}
+.ktiba {
+  margin-top: 150px;
+}
+.ROOT_CSS {
+  height: 400px;
+  max-width: 400px;
+  margin-left: 35%;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.avatarmessages {
+  width: 30px;
+  height: 30px;
+  margin: 10px 15px;
+  border-radius: 50%;
+}
+.message-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 70%;
+  margin: 20px 10px;
+}
+.msgmyfriend {
+  border: #3e4042 1px solid;
+  border-radius: 20px;
+  background-color: #3e4042;
+  color: white;
+}
+.myusemessgr {
+  border: #0084ff 1px solid;
+  border-radius: 20px;
+  background-color: #0084ff;
+  margin-left: 30%;
+  color: white;
+}
+.namefriendmsgavail {
+  display: flex;
 
-  /* left: 118px;
-  top: 48px; */
+  max-width: 400px;
+  margin-left: 35%;
+  border: solid 1px #f5f6f7;
+  background-color: #f5f6f7;
+  padding-left: 25px;
+  border-radius: 5px;
+}
+.inputsendcontainer {
+  display: flex;
+  flex-direction: row;
+  border: solid 1px #f5f6f7;
+  background-color: white;
+  border-radius: 5px;
+  margin-left: 35%;
+  margin-top: 5px;
+  width: 400px;
+  height: 50px;
+}
+.inputsendmessage {
+  border: solid 1px #f5f6f7;
+  width: 380px;
+  background-color: white;
+}
+.faPaperPlane {
+  color: #00abff;
+  font-size: 20px;
+  margin: 10px;
 }

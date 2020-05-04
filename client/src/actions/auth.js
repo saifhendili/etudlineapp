@@ -9,7 +9,7 @@ import {
   LOGIN_FAIL,
   CLEAR_PROFILE,
   LOGOUT,
-  SEND_REQUEST,
+
 } from './Types';
 import setAuthToken from '../utils/setAuthToken';
 export const loadUser = () => async (dispatch) => {
