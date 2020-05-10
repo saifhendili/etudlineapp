@@ -119,19 +119,19 @@ const EditProfile = ({
             value={location}
           />
           <p className='infocreateprof'>City suggested (eg. tunis )</p>
-          <input
+          {/* <input
             type='text'
             onChange={(e) => onChange(e)}
             className='myinputCreateProfile'
             placeholder='Website'
             name='website'
             value={website}
-          />
-          <p className='infocreateprof'>
+          /> */}
+          {/* <p className='infocreateprof'>
             Could be your own or a company website
-          </p>
+          </p> */}
 
-          <input
+          {/* <input
             type='text'
             onChange={(e) => onChange(e)}
             className='myinputCreateProfile'
@@ -142,7 +142,7 @@ const EditProfile = ({
 
           <p className='infocreateprof'>
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
-          </p>
+          </p> */}
           <textarea
             type='text'
             onChange={(e) => onChange(e)}

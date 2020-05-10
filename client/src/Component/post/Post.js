@@ -8,11 +8,14 @@ import PostItem from '../posts/PostItem';
 import CommentForm from '../post/CommentForm';
 import CommentItem from '../post/CommentItem';
 import { getPost } from '../../actions/post';
+import queryString from 'query-string';
 
-const Post = ({ getPost, post: { post, loading }, match }) => {
+const Post = ({ getPost, post: { post, loading }, location }) => {
+  const { id } = queryString.parse(location.search);
+
   useEffect(() => {
-    getPost(match.params.id);
-  }, [getPost, match.params.id]);
+    getPost(id);
+  }, [getPost, id]);
 
   return loading || post === null ? (
     <Spinner />

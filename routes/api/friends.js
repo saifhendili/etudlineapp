@@ -222,6 +222,7 @@ router.post('/acceptfriend/:id', auth, async (req, res) => {
       user: frienduser.id,
       myuser: me.id,
       chatid: chatidd,
+      isOnline: false,
     };
     const newsentRequests = await {
       firstname: me.firstname,
@@ -230,6 +231,7 @@ router.post('/acceptfriend/:id', auth, async (req, res) => {
       user: me.id,
       myuser: frienduser.id,
       chatid: chatidd,
+      isOnline: false,
     };
 
     await frienduser.friends.unshift(newsentRequests);
@@ -262,18 +264,18 @@ router.get('/getfriends', auth, async (req, res) => {
   }
 });
 module.exports = router;
-// router.get('/getchat/:id', auth, async (req, res) => {
-//   try {
-//     const me = await User.findById(req.user.id);
-//     const frienduser = await User.findById(req.params.id);
-//     let my = '';
-//     await frienduser.chat.map((el, i) => {
-//       el.userid == me.id ? (my = el._id) : null;
-//     });
-//     res.json(my);
-//   } catch (error) {
-//     console.error(error.message);
-//     res.status(500).send('Server Error');
-//   }
-// });
-// module.exports = router;
+
+router.get('/onlinefriend/', auth, async (req, res) => {
+  try {
+    const me = await User.findById(req.user.id);
+    let online = [];
+    await me.friends.map((el, i) => {
+      el.isOnline === true ? online.unshift(el) : null;
+    });
+    res.json(online);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+module.exports = router;

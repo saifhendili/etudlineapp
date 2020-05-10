@@ -33,10 +33,7 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  isOnline: {
-    type: Boolean,
-    default: false,
-  },
+
   friends: {
     type: [
       {
@@ -46,6 +43,7 @@ const UserSchema = new mongoose.Schema({
         user: String,
         myuser: String,
         chatid: String,
+        isOnline: Boolean,
       },
     ],
     default: [
@@ -56,6 +54,7 @@ const UserSchema = new mongoose.Schema({
         user: '',
         myuser: '',
         chatid: '',
+        isOnline: false,
       },
     ],
   },

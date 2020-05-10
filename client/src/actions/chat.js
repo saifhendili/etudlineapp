@@ -1,6 +1,6 @@
 import axios from 'axios';
 // import { SetAlert } from './alert';
-import { GET_ROOM, GET_MESSAGES } from './Types';
+import { GET_ROOM, GET_MESSAGES, DELETE_MESSAGES } from './Types';
 
 export const Getroom = (id) => async (dispatch) => {
   try {
@@ -24,4 +24,9 @@ export const GetMessages = (friendid) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+export const clearMessage = () => (dispatch) => {
+  dispatch({
+    type: DELETE_MESSAGES,
+  });
 };

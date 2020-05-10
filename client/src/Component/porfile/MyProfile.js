@@ -9,7 +9,7 @@ import Friend from './Friend';
 import Educationbox from './Education';
 import Experienceboc from '../porfile/Experience';
 import { GetFriends } from '../../actions/friends';
-import Room from '../chat/FrinedOnline';
+// import Room from '../chat/FrinedOnline';
 import img from '../../image/univer.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -129,9 +129,7 @@ const Profile = ({
             <section className='friendbox'>
               <Friend friends={friends} />
             </section>
-            <section>
-              <Room />
-            </section>
+            <section>{/* <Roo m /> */}</section>
           </main>
         </Fragment>
       )}

@@ -74,7 +74,6 @@ function Navbar({
         <li>
           <a onClick={logout} href='#!' className='linknav'>
             <FontAwesomeIcon className='faSignOutAlt' icon={faSignOutAlt} />
-
             <span className='logout'>Logout</span>
           </a>
         </li>

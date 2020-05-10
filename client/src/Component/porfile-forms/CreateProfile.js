@@ -99,18 +99,18 @@ const CreateProfile = ({ auth: { user }, createProfile, history }) => {
             Could be your own or a company website
           </p> */}
 
-          <input
+          {/* <input
             type='text'
             onChange={(e) => onChange(e)}
             className='myinputCreateProfile'
             placeholder='Skills'
             name='skills'
             value={skills}
-          />
+          /> */}
 
-          <p className='infocreateprof'>
+          {/* <p className='infocreateprof'>
             Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
-          </p>
+          </p> */}
           <textarea
             type='text'
             onChange={(e) => onChange(e)}

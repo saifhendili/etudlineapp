@@ -23,6 +23,7 @@ const PostItem = ({
     <div className='infopost'>
       <div className='delete-ppost'>
         <Link className='post-icon' to={`/profile/${user}`}>
+          
           <img className='squard-img2' src={avatar} alt='' />
           <h4 className='name-post'>
             {firstname} {lastname}
@@ -62,7 +63,9 @@ const PostItem = ({
           >
             <FontAwesomeIcon icon={faThumbsDown} />
           </button>
-          <Link to={`/posts/${_id}`} className='btn-comments'>
+         
+
+          <Link to={`/posts?id=${_id}`} className='btn-comments'>
             Comment{' '}
             {comments.length > 0 && (
               <span className='comment-count'>{comments.length}</span>

@@ -15,12 +15,13 @@ const User = ({
       lastname.includes(search.toLowerCase()) ? (
         <div className='profile'>
           <div className='info-viewprof'>
-            <Link className='linksmpl' to={`/profiles/${_id}`}>
+            {/* <Link  to={`/profiles/${_id}`}></Link> */}
+            <Link className='linksmpl' to={`/friendprofiles?id=${_id}`}>
               <img src={avatar} alt='avatar' className='squard-img' />
             </Link>
 
             <div>
-              <Link className='linksmpl' to={`/profiles/${_id}`}>
+              <Link className='linksmpl' to={`/friendprofiles?id=${_id}`}>
                 <h2 className='name-send-req'>
                   {firstname} {lastname}
                 </h2>
@@ -32,7 +33,7 @@ const User = ({
             </div>
           </div>
           {/* <p className='my-1'>{location && <span>{location}</span>}</p> */}
-          <Link to={`/profiles/${_id}`}>
+          <Link to={`/friendprofiles?id=${_id}`}>
             <button className='view-profile'> View Profile</button>
           </Link>
 

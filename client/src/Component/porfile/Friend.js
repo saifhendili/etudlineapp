@@ -12,7 +12,7 @@ const Friend = ({ friends }) => {
         {friends.map((el, i) => (
           <Fragment key={i}>
             {el.avatar == '' ? null : (
-              <Link to={`/profiles/${el._id}`}>
+              <Link to={`/friendprofiles?id=${el._id}`}>
                 <div className='onefriend' key={i}>
                   <img
                     src={el.avatar}

@@ -952,3 +952,26 @@ li {
   font-size: 20px;
   margin: 10px;
 }
+.boxONline {
+  position: fixed;
+  margin-left: 81.8%;
+  border: black 1px solid;
+  height: 550px;
+  width: 250px;
+  border-radius: 5px;
+  background-color: white;
+  z-index: 1;
+  top: 84px;
+}
+.makeOnline {
+  margin: 10px 10px 0 -20px;
+  font-size: 25px;
+  border-bottom: grey solid 1px;
+}
+.makeOnline::before {
+  content: '\2022';
+  color: #42b72a;
+  display: inline-block;
+  padding-right: 15px;
+  font-size: 30px;
+}

@@ -13,6 +13,8 @@ import {
   GET_FRIENDS,
   DELETE_FRIENDS,
   GETNOTIFICATIONREQ,
+  GETONLINE,
+  NEWCONNECT,
 } from './Types';
 export const SSendRequest = (id) => async (dispatch) => {
   try {
@@ -151,4 +153,22 @@ export const Getreqfriendnotif = (id) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+export const GetOnline = () => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/friends/onlinefriend`);
+    dispatch({
+      type: GETONLINE,
+      payload: res.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const newConnect = (payload) => (dispatch) => {
+  dispatch({
+    type: NEWCONNECT,
+    payload,
+  });
 };

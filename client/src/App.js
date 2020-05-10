@@ -15,7 +15,7 @@ import ProfilePeople from './Component/porfile/ProfilePeople';
 import Posts from './Component/posts/Posts';
 import Post from './Component/post/Post';
 import Room from './Component/chat/Room';
-
+import FriendOnline from './Component/Online/FriendOnline';
 import Login from './Component/auth/Login';
 import './App.css';
 import { Provider } from 'react-redux';
@@ -36,6 +36,7 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
+          <FriendOnline />
           <Route exact path='/' component={Landing} />
           <section className='container'>
             <Alert className='aaa' />
@@ -68,11 +69,12 @@ const App = () => {
               <PrivateRoute exact path='/profiles' component={AllProfile} />
               <PrivateRoute
                 exact
-                path='/profiles/:id'
+                path='/friendprofiles'
                 component={ProfilePeople}
               />
               <PrivateRoute exact path='/home' component={Posts} />
-              <PrivateRoute exact path='/posts/:id' component={Post} />
+              <PrivateRoute exact path='/posts' component={Post} />
+
               <PrivateRoute exact path='/chat' component={Room} />
             </Switch>
           </section>

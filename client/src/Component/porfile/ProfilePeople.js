@@ -23,6 +23,7 @@ import Spinner from '../Layout/Spinner';
 import img from '../../image/univer.jpg';
 import { GetSendreq, getreqfriend, GetFriends } from '../../actions/friends';
 import { getProfileById } from '../../actions/profile';
+import queryString from 'query-string';
 
 const PrifilePeople = ({
   getProfileById,
@@ -30,19 +31,21 @@ const PrifilePeople = ({
   getreqfriend,
   profile: { profile, loading },
   auth: { user },
-  match,
+
   GetFriends,
   friends: { sendrequest, friendrequest, friends, friendreqnotif },
+  location,
 }) => {
+  const { id } = queryString.parse(location.search);
   const nullProfile = !profile;
   let bool = false;
   let friendss = false;
   let sendfr = false;
   useEffect(() => {
     GetFriends();
-    getProfileById(match.params.id);
-    GetSendreq(match.params.id);
-    getreqfriend(match.params.id);
+    getProfileById(id);
+    GetSendreq(id);
+    getreqfriend(id);
   }, [getProfileById, GetSendreq, getreqfriend, GetFriends]);
 
   return (
@@ -53,7 +56,7 @@ const PrifilePeople = ({
         </Fragment>
       ) : (
         <Fragment>
-          {user._id === match.params.id ? (
+          {user._id === id ? (
             <Redirect to='/profile' />
           ) : (
             <Fragment>
@@ -88,7 +91,7 @@ const PrifilePeople = ({
                         ))}
                         {friends.map((friend, i) => (
                           <div>
-                            {friend.user == match.params.id ? (
+                            {friend.user == id ? (
                               (friendss = true)
                             ) : (
                               <Fragment></Fragment>
@@ -98,7 +101,7 @@ const PrifilePeople = ({
                         =
                         {sendrequest.map((el, i) => (
                           <div>
-                            {el.user.includes(match.params.id) ? (
+                            {el.user.includes(id) ? (
                               (bool = true)
                             ) : (
                               <Fragment></Fragment>
@@ -106,19 +109,19 @@ const PrifilePeople = ({
                           </div>
                         ))}
                         {friendss ? (
-                          <DeleteFriend id={match.params.id} />
+                          <DeleteFriend id={id} />
                         ) : sendfr ? (
                           <div className='buttfredreq'>
-                            <AcceptFriend id={match.params.id} />
+                            <AcceptFriend id={id} />
 
-                            <RejectFriend id={match.params.id} />
+                            <RejectFriend id={id} />
                           </div>
                         ) : bool == false ? (
                           <div className='buttpeoplprof'>
-                            <SendRequest id={match.params.id} />
+                            <SendRequest id={id} />
                           </div>
                         ) : (
-                          <Deletereq id={match.params.id} />
+                          <Deletereq id={id} />
                         )}
                       </Fragment>
 

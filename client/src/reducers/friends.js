@@ -11,6 +11,8 @@ import {
   GET_FRIENDS,
   DELETE_FRIENDS,
   GETNOTIFICATIONREQ,
+  GETONLINE,
+  NEWCONNECT,
 } from '../actions/Types';
 
 const initialState = {
@@ -18,6 +20,8 @@ const initialState = {
   friendrequest: [],
   friends: [],
   friendreqnotif: [],
+  online: [],
+  newconnect: [],
 };
 export default function (state = initialState, action) {
   const { type, payload } = action;
@@ -81,6 +85,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         friendreqnotif: payload,
+      };
+    case GETONLINE:
+      return {
+        ...state,
+        online: payload,
+      };
+    case NEWCONNECT:
+      return {
+        ...state,
+        newconnect: payload,
       };
     default:
       return state;

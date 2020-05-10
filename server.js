@@ -12,8 +12,62 @@ const server = http.createServer(app);
 var io = socketio(server);
 
 app.use(cors());
-io.on('connect', (socket) => {
+io.on('connection', (socket) => {
+  console.log('connecter');
+  let myfriendid;
+  let myroom;
+
+  socket.on('Online', async ({ friendid, room }, callback) => {
+    const user = await User.findById(friendid);
+    myfriendid = friendid;
+    myroom = room;
+    await user.friends.map((el, i) => {
+      el.chatid === room ? (el.isOnline = true) : null;
+    });
+    socket.join(room);
+    await user.friends.map((el, i) => {
+      el.chatid === room
+        ? socket.broadcast.to(room).emit('message', {
+            user: `${el.user}`,
+            firstname: `${el.firstname}`,
+            lastname: `${el.lastname}`,
+            isOnline: true,
+            room: room,
+            myuser: el.myuser,
+          })
+        : null;
+    });
+
+    user.save();
+  });
+
+  socket.on('disconnect', async () => {
+    const user = await User.findById(myfriendid);
+
+    user.friends.map((el) => {
+      el.chatid === myroom ? (el.isOnline = false) : null;
+    });
+    socket.join(myroom);
+
+    await user.friends.map((el, i) => {
+      el.chatid === myroom
+        ? socket.broadcast.to(myroom).emit('message', {
+            user: `${el.user}`,
+            firstname: `${el.firstname}`,
+            lastname: `${el.lastname}`,
+            isOnline: false,
+            room: myrooms,
+            myuser: el.myuser,
+          })
+        : null;
+    });
+
+    user.save();
+  });
+});
+io.on('connection', (socket) => {
   console.log('con');
+
   socket.on('join', async ({ name, room }, callback) => {
     console.log('sockets connection ' + name + room);
     const user = await User.findById(name);
@@ -31,6 +85,8 @@ io.on('connect', (socket) => {
       sender: user.firstname,
       text: message,
       avatar: user.avatar,
+      myid: name,
+      room: room,
     };
     await user.chat.map((el, i) => {
       {
@@ -49,6 +105,8 @@ io.on('connect', (socket) => {
       user: user.firstname,
       text: message,
       avatar: user.avatar,
+      myid: name,
+      room: room,
     });
 
     callback();

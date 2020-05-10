@@ -5,17 +5,18 @@ import { connect } from 'react-redux';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import ReactEmoji from 'react-emoji';
 const GetYourMessages = ({
+  chat: { messages, room },
+  mymessages,
   friendid,
-  GetMessages,
-  chat: { messages },
-  messagess,
-
   myid,
+  roomm,
+  GetMessages,
+  newconnect,
 }) => {
-  useEffect(() => {
-    GetMessages(friendid);
-  }, [GetMessages]);
-
+  // useEffect(() => {
+  //   GetMessages(friendid);
+  // }, [GetMessages]);
+  // console.log(roomm);
   return (
     <div className='container-messages'>
       <ScrollToBottom className={'ROOT_CSS'}>
@@ -32,9 +33,11 @@ const GetYourMessages = ({
             </div>
           )
         )}
-        {messagess.map((el, i) =>
-          myid == el.myid ? (
+        {/* && el.room == roomm/ */}
+        {newconnect.map((el, i) =>
+          el.room !== roomm ? null : myid == el.myid ? (
             <div className='message-container myusemessgr'>
+              {/* <h1>{room.chatid}</h1> */}
               <img className='avatarmessages' src={el.avatar} />
               <p className={``}>{ReactEmoji.emojify(el.text)}</p>
             </div>
@@ -55,6 +58,6 @@ GetYourMessages.propTypes = {
 };
 const mapStateToProps = (state) => ({
   chat: state.chat,
-
+  newconnect: state.friends.newconnect,
 });
 export default connect(mapStateToProps, { GetMessages })(GetYourMessages);

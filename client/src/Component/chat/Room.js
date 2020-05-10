@@ -8,36 +8,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 let socket;
-const Room = ({ location }) => {
+const Room = ({ location, messages }) => {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [mymessages, setMessages] = useState([]);
   const ENDPOINT = 'localhost:5000';
   const { fname, lname, name, room, friendid } = queryString.parse(
     location.search
   );
-
   useEffect(() => {
-    // const { name, room } = queryString.parse(location.search);
-
     socket = io(ENDPOINT);
-
     socket.emit('join', { name, room }, () => {});
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
     socket.on('message', (message) => {
-      setMessages([...messages, message]);
+      setMessages([...mymessages, message]);
     });
-  }, [messages]);
+  }, [mymessages, ENDPOINT]);
+  // console.log(mymessages);
   const sendMessage = async (e) => {
     await e.preventDefault();
-    // const { name, room } = await queryString.parse(location.search);
-
     if (message) {
       socket.emit('sendMessage', { message, name, room }, () => setMessage(''));
     }
   };
-  console.log(messages);
+
   return (
     <div className='ktiba'>
       <div className='namefriendmsgavail'>
@@ -45,7 +40,12 @@ const Room = ({ location }) => {
           {fname} {lname}
         </h2>
       </div>
-      <GetYourMessages friendid={friendid} messagess={messages} myid={name} />
+      <GetYourMessages
+        friendid={friendid}
+        mymessages={mymessages}
+        myid={name}
+        roomm={room}
+      />
       <div className='inputsendcontainer'>
         <input
           type='text'
@@ -62,6 +62,6 @@ const Room = ({ location }) => {
 
 Room.propTypes = {};
 const mapStateToProps = (state) => ({
-  chat: state.chat,
+  messages: state.chat.messages,
 });
 export default connect(mapStateToProps, {})(Room);
