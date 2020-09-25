@@ -13,7 +13,7 @@ const Experience = ({ profile: { profile, loading }, location }) => {
   return (
     <Fragment>
       {profile.experience.length > 0 ? (
-        <div className='box-education'>
+        <div className='box-expe'>
           <div className='educview'>
             <p className='espacebox'>
               <FontAwesomeIcon

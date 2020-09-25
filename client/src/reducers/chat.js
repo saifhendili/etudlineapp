@@ -1,8 +1,14 @@
-import { GET_ROOM, GET_MESSAGES, DELETE_MESSAGES } from '../actions/Types';
+import {
+  GET_ROOM,
+  GET_MESSAGES,
+  DELETE_MESSAGES,
+  NEW_MESSAGE,
+} from '../actions/Types';
 
 const initialState = {
   room: [],
   messages: [],
+  mynewmessage: [],
 };
 export default function (state = initialState, action) {
   const { type, payload } = action;
@@ -22,6 +28,11 @@ export default function (state = initialState, action) {
       return {
         room: [],
         messages: [],
+      };
+    case NEW_MESSAGE:
+      return {
+        ...state,
+        mynewmessage: payload,
       };
     default:
       return state;

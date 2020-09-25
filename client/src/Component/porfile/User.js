@@ -13,38 +13,27 @@ const User = ({
     <Fragment>
       {firstname.includes(search.toLowerCase()) ||
       lastname.includes(search.toLowerCase()) ? (
-        <div className='profile'>
-          <div className='info-viewprof'>
-            {/* <Link  to={`/profiles/${_id}`}></Link> */}
-            <Link className='linksmpl' to={`/friendprofiles?id=${_id}`}>
-              <img src={avatar} alt='avatar' className='squard-img' />
-            </Link>
+        <Link to={`/friendprofiles?id=${_id}`}>
+          <div class='center'>
+            <div class='property-card'>
+              <div class='property-image'>
+                <div>
+                  <img class='property-image-reel' src={avatar} />
+                </div>
+              </div>
 
-            <div>
-              <Link className='linksmpl' to={`/friendprofiles?id=${_id}`}>
-                <h2 className='name-send-req'>
-                  {firstname} {lastname}
-                </h2>
-              </Link>
-              <p className='firstpart-req'>
-                <span className='typeusers'>{typeuser}</span>{' '}
-                {company && <span> at {company}</span>}
-              </p>
+              <div class='property-description'>
+                <h5>
+                  {' '}
+                  {firstname} {lastname}{' '}
+                </h5>
+                <p>
+                  {typeuser} at {company}
+                </p>
+              </div>
             </div>
           </div>
-          {/* <p className='my-1'>{location && <span>{location}</span>}</p> */}
-          <Link to={`/friendprofiles?id=${_id}`}>
-            <button className='view-profile'> View Profile</button>
-          </Link>
-
-          {/* <ul>
-           {skills.slice(0, 4).map((skill, index) => (
-             <li key={index} className='text-primary'>
-               <i className='fas fa-check' /> {skill}
-             </li>
-           ))}
-         </ul> */}
-        </div>
+        </Link>
       ) : (
         <Fragment></Fragment>
       )}

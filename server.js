@@ -1,8 +1,8 @@
+const express = require('express');
 const connectDB = require('./config/db');
 const http = require('http');
-const express = require('express');
+
 const socketio = require('socket.io');
-// const { getuser } = require('./middleware/chat');
 const cors = require('cors');
 const User = require('./models/User');
 
@@ -21,29 +21,49 @@ io.on('connection', (socket) => {
     const user = await User.findById(friendid);
     myfriendid = friendid;
     myroom = room;
-    await user.friends.map((el, i) => {
-      el.chatid === room ? (el.isOnline = true) : null;
-    });
-    socket.join(room);
-    await user.friends.map((el, i) => {
-      el.chatid === room
-        ? socket.broadcast.to(room).emit('message', {
-            user: `${el.user}`,
-            firstname: `${el.firstname}`,
-            lastname: `${el.lastname}`,
-            isOnline: true,
-            room: room,
-            myuser: el.myuser,
-          })
-        : null;
-    });
+    console.log(user.Online + '21');
+    if (user.Online) {
+      await user.friends.map((el, i) => {
+        el.chatid === room ? (el.isOnline = true) : null;
+      });
+      socket.join(room);
+      await user.friends.map((el, i) => {
+        el.chatid === room
+          ? socket.broadcast.to(room).emit('online', {
+              user: `${el.user}`,
+              firstname: `${el.firstname}`,
+              lastname: `${el.lastname}`,
+              isOnline: true,
+              chatid: room,
+              myuser: el.myuser,
+            })
+          : null;
+      });
+    } else {
+      user.friends.map((el) => {
+        el.chatid === myroom ? (el.isOnline = false) : null;
+      });
+      socket.join(myroom);
+
+      await user.friends.map((el, i) => {
+        el.chatid === myroom
+          ? socket.broadcast.to(myroom).emit('online', {
+              user: `${el.user}`,
+              firstname: `${el.firstname}`,
+              lastname: `${el.lastname}`,
+              isOnline: false,
+              chatid: myroom,
+              myuser: el.myuser,
+            })
+          : null;
+      });
+    }
 
     user.save();
   });
 
   socket.on('disconnect', async () => {
     const user = await User.findById(myfriendid);
-
     user.friends.map((el) => {
       el.chatid === myroom ? (el.isOnline = false) : null;
     });
@@ -51,17 +71,16 @@ io.on('connection', (socket) => {
 
     await user.friends.map((el, i) => {
       el.chatid === myroom
-        ? socket.broadcast.to(myroom).emit('message', {
+        ? socket.broadcast.to(myroom).emit('online', {
             user: `${el.user}`,
             firstname: `${el.firstname}`,
             lastname: `${el.lastname}`,
             isOnline: false,
-            room: myrooms,
+            chatid: myroom,
             myuser: el.myuser,
           })
         : null;
     });
-
     user.save();
   });
 });
@@ -73,10 +92,6 @@ io.on('connection', (socket) => {
     const user = await User.findById(name);
     console.log(user.firstname);
     socket.join(room);
-    socket.emit('message', {
-      user: 'admin',
-      text: `${user.firstname}, welcome to room .`,
-    });
   });
   socket.on('sendMessage', async ({ message, name, room }, callback) => {
     const user = await User.findById(name);
@@ -124,6 +139,9 @@ app.use('/api/friends', require('./routes/api/friends'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/chat', require('./routes/api/chat'));
+app.use('/api/authadmin', require('./routes/api/authadmin'));
+app.use('/api/encadrement', require('./routes/api/encadrement'));
+app.use('/api/Cours', require('./routes/api/Cours'));
 
 server.listen(process.env.PORT || 5000, () =>
   console.log(`Server has started on.`)

@@ -4,7 +4,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { Link, Redirect } from 'react-router-dom';
 import { login } from '../../actions/auth';
 import img from '../../image/formation2.jpg';
-// import Dashboard from '../dashborad/Dashboard';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -22,6 +21,7 @@ function Login({ login, isAuthenticated }) {
     login(email, password);
   };
   if (isAuthenticated) {
+
     return <Redirect to='/dashboard' />
   }
   return (

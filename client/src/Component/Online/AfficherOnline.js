@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { GetOnline } from '../../actions/friends';
-import { Getroom } from '../../actions/chat';
-import { Link } from 'react-router-dom';
 import Aff from './Aff';
-const AfficherOnline = ({ GetOnline, online, newconnect, Getroom }) => {
+const AfficherOnline = ({ GetOnline, online, newconnect }) => {
   useEffect(() => {
     GetOnline();
   }, [GetOnline]);
@@ -17,12 +15,6 @@ const AfficherOnline = ({ GetOnline, online, newconnect, Getroom }) => {
           er.user == el.user ? (el.isOnline = er.isOnline) : null
         )
       )}
-
-      {/* <Link
-                to={`/chat?fname=${el.firstname}&&lname=${el.lastname}&&name=${el.myuser}&room=${el.room}&friendid=${el.user}`}
-              >
-                {el.firstname} {el.lastname}
-              </Link>{' '} */}
       {online.map((el) => (el.isOnline ? <Aff el={el} id={el.user} /> : null))}
       {newconnect.map((el, i) =>
         !el.isOnline
@@ -38,11 +30,7 @@ const AfficherOnline = ({ GetOnline, online, newconnect, Getroom }) => {
         )
       )}
       {newconnect.map((el, i) =>
-        el.isOnline ? (
-          <li className='makeOnline'>
-            <Aff el={el} id={el.user} />
-          </li>
-        ) : null
+        el.isOnline ? <Aff el={el} id={el.user} /> : null
       )}
     </div>
   );
@@ -50,10 +38,9 @@ const AfficherOnline = ({ GetOnline, online, newconnect, Getroom }) => {
 
 AfficherOnline.propTypes = {
   GetOnline: PropTypes.func.isRequired,
-  Getroom: PropTypes.func.isRequired,
 };
 const mapStateToProps = (state) => ({
   online: state.friends.online,
   newconnect: state.friends.newconnect,
 });
-export default connect(mapStateToProps, { GetOnline, Getroom })(AfficherOnline);
+export default connect(mapStateToProps, { GetOnline })(AfficherOnline);

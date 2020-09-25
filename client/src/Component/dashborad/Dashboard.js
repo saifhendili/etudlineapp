@@ -6,14 +6,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../Layout/Spinner';
 import DashboardActions from './DashboardActions';
-import Experience from './Experience';
-import Education from './Education';
+import MenuDashboard from './MenuDashboard';
+// import Experience from './Experience';
+// import Education from './Education';
+// import { setONline, setofline } from '../../actions/auth';
 
 import { getCurrentProfile } from '../../actions/profile';
 
 const Dashboard = ({
   getCurrentProfile,
-  auth: { user },
+  auth: { user, isAuthenticated },
   profile: { profile, loading },
 }) => {
   useEffect(() => {
@@ -24,16 +26,29 @@ const Dashboard = ({
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className='stype-dash-title'>Dashboard</h1>
-      <h1 className='welcome-Title'>
-        <FontAwesomeIcon className='faUsertitle' icon={faUser} />
-        Welcome {user && user.firstname}
+      <h1
+        className={
+          profile !== null ? 'stype-dash-title' : 'new-stype-dash-title'
+        }
+      >
+        Dashboard
       </h1>
+      <div className='welcomuser'>
+        <img
+          src={user.avatar}
+          alt='user'
+          className={
+            profile !== null ? 'avatardashboard' : 'newavatardashboard'
+          }
+        />
+        <h1 className='welcome-Title'>
+          {/* <FontAwesomeIcon className='faUsertitle' icon={faUser} /> */}
+          Welcome {user && user.firstname}
+        </h1>
+      </div>
       {profile !== null ? (
         <Fragment>
-          <DashboardActions />
-          {/* <Experience experience={profile.experience} /> */}
-          {/* <Education education={profile.education} /> */}
+          <MenuDashboard user={user} />
         </Fragment>
       ) : (
         <Fragment>

@@ -1,12 +1,20 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { deleteEducation } from '../../actions/profile';
+import { getCurrentProfile } from '../../actions/profile';
 
-const Education = ({ education, deleteEducation }) => {
-  const educations = education.map((edu) => (
+const Education = ({
+  profile: { profile, loading },
+  getCurrentProfile,
+  deleteEducation,
+}) => {
+  useEffect(() => {
+    getCurrentProfile();
+  }, []);
+  const educations = profile.education.map((edu) => (
     <tr key={edu._id}>
       <td className='info-table'>{edu.school}</td>
       <td className='info-table'>{edu.degree}</td>
@@ -45,8 +53,12 @@ const Education = ({ education, deleteEducation }) => {
 };
 
 Education.propTypes = {
-  education: PropTypes.array.isRequired,
   deleteEducation: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
 };
-
-export default connect(null, { deleteEducation })(Education);
+const mapStateToProps = (state) => ({
+  profile: state.profile,
+});
+export default connect(mapStateToProps, { deleteEducation, getCurrentProfile })(
+  Education
+);

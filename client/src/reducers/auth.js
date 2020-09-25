@@ -6,6 +6,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  SET_ONLINE,
+  SET_OFLINE,
 } from '../actions/Types';
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
+  online: false,
 };
 export default function (state = initialState, action) {
   const { type, payload } = action;
@@ -47,6 +50,16 @@ export default function (state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false,
+      };
+    case SET_ONLINE:
+      return {
+        ...state,
+        online: payload,
+      };
+    case SET_OFLINE:
+      return {
+        ...state,
+        online: payload,
       };
 
     default:

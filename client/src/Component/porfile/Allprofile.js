@@ -20,9 +20,11 @@ const Allprofile = ({
         <Fragment>
           {/* <Navbar /> */}
           <h1 className='searchforpreople'>Search For People</h1>
+          <div className='all-profile'>
           {profiles.map((profile, i) => (
             <User key={profile._id} profile={profile} search={search} />
           ))}
+          </div>
         </Fragment>
       )}
     </Fragment>

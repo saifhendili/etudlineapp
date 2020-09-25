@@ -6,6 +6,7 @@ import {
   GET_PROFILES,
   PROFILE_ERROR,
   UPDATE_PROFILE,
+  CLEAR_PROFILE,
   GET_SEARCH,
 } from './Types';
 export const getsearch = (payload) => (dispatch) => {
@@ -166,7 +167,7 @@ export const deleteEducation = (id) => async (dispatch) => {
 //get profile
 // Get all profiles
 export const getProfiles = () => async (dispatch) => {
-  // dispatch({ type: CLEAR_PROFILE });
+  dispatch({ type: CLEAR_PROFILE });
 
   try {
     const res = await axios.get('/api/profile/');

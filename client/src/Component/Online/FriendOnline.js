@@ -8,7 +8,14 @@ function FriendOnline({ auth: { isAuthenticated, loading } }) {
   return (
     <div>
       {!loading && (
-        <Fragment>{isAuthenticated ? <ListFriendOnline /> : null}</Fragment>
+        <Fragment>
+          {isAuthenticated ? (
+            <div>
+              {' '}
+              <ListFriendOnline />{' '}
+            </div>
+          ) : null}
+        </Fragment>
       )}
     </div>
   );

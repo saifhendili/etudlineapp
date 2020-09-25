@@ -73,7 +73,7 @@ const CreateProfile = ({ auth: { user }, createProfile, history }) => {
             type='text'
             className='myinputCreateProfile'
             onChange={(e) => onChange(e)}
-            placeholder='Company'
+            placeholder='* Company'
             name='company'
             value={company}
           />
@@ -81,36 +81,13 @@ const CreateProfile = ({ auth: { user }, createProfile, history }) => {
           <input
             type='text'
             className='myinputCreateProfile'
-            placeholder='Location'
+            placeholder='* Location'
             onChange={(e) => onChange(e)}
             name='location'
             value={location}
           />
           <p className='infocreateprof'>City suggested (eg. tunis )</p>
-          {/* <input
-            type='text'
-            onChange={(e) => onChange(e)}
-            className='myinputCreateProfile'
-            placeholder='Website'
-            name='website'
-            value={website}
-          />
-          <p className='infocreateprof'>
-            Could be your own or a company website
-          </p> */}
 
-          {/* <input
-            type='text'
-            onChange={(e) => onChange(e)}
-            className='myinputCreateProfile'
-            placeholder='Skills'
-            name='skills'
-            value={skills}
-          /> */}
-
-          {/* <p className='infocreateprof'>
-            Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
-          </p> */}
           <textarea
             type='text'
             onChange={(e) => onChange(e)}

@@ -94,12 +94,7 @@ router.delete('/deletereq/:id', auth, async (req, res) => {
   try {
     const me = await User.findById(req.user.id);
     const frienduser = await User.findById(req.params.id);
-    // const newRequest = {
-    //   user: frienduser.id,
-    // };
-    // me.sentRequests = me.sentRequests.filter(
-    //   (user) => user.user !== newRequest.user
-    // );
+
     const newsentRequests = {
       user: me.id,
     };
@@ -276,6 +271,31 @@ router.get('/onlinefriend/', auth, async (req, res) => {
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server Error');
+  }
+});
+module.exports = router;
+
+router.put('/setonline/', auth, async (req, res) => {
+  try {
+    const me = await User.findById(req.user.id);
+
+    me.Online = await true;
+    me.save();
+    res.json(me.Online);
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+module.exports = router;
+
+router.put('/setofline/', auth, async (req, res) => {
+  try {
+    const me = await User.findById(req.user.id);
+    me.Online = false;
+    me.save();
+    res.json(me.Online);
+  } catch (error) {
+    console.error(error.message);
   }
 });
 module.exports = router;

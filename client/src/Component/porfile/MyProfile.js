@@ -11,6 +11,12 @@ import Experienceboc from '../porfile/Experience';
 import { GetFriends } from '../../actions/friends';
 // import Room from '../chat/FrinedOnline';
 import img from '../../image/univer.jpg';
+import {
+  faUsers,
+  faUniversity,
+  faGraduationCap,
+} from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebookSquare,
@@ -28,13 +34,38 @@ const Profile = ({
   useEffect(() => {
     GetFriends();
   }, [GetFriends]);
-
+  const [displayfriends, toggleSocialInputs] = useState({
+    friendsdis: false,
+    displayexper: false,
+    displayeduc: false,
+  });
+  const { friendsdis, displayexper, displayeduc } = displayfriends;
+  const displaymyfriends = (e) => {
+    toggleSocialInputs({
+      displayexper: false,
+      displayeduc: false,
+      friendsdis: !friendsdis,
+    });
+  };
+  const displaymyexp = (e) => {
+    toggleSocialInputs({
+      displayexper: !displayexper,
+      displayeduc: false,
+      friendsdis: false,
+    });
+  };
+  const displaymyeduca = (e) => {
+    toggleSocialInputs({
+      displayexper: false,
+      displayeduc: !displayeduc,
+      friendsdis: false,
+    });
+  };
   return (
     <Fragment>
       {profile === null || loading ? (
         <Fragment>
           <Spinner />
-          {/* {profile === null ? <h1>ok</h1> : <h1>non</h1>} */}
           <Redirect to='/create-profile' />
         </Fragment>
       ) : (
@@ -43,18 +74,23 @@ const Profile = ({
             <img className='back-prof' src={img} />
 
             <section className='myProfile'>
-              <section className='header-row'>
-                <Educationbox />
-                <div className='pdpandname'>
-                  <img className='photo-de-profile' src={user.avatar} />
+              {/* <section className='header-row'> */}
+              {/* <Educationbox /> */}
+
+              <div className='pdpandname'>
+                <img className='photo-de-profile' src={user.avatar} />
+                <div className='info-here'>
                   <h3 className='myname'>
                     {user.firstname} {user.lastname}
+                  </h3>
+                  <h3 className='typeuserprofile'>
+                    {user.typeuser.toUpperCase()}
                   </h3>
                   {!profile.social ? (
                     <Fragment>
                       {' '}
                       <Link to='/edit-profile'>
-                        <button className='addsoc pos'>Add Social Media</button>
+                        <button className='addsoc '>Add Social Media</button>
                       </Link>
                     </Fragment>
                   ) : (
@@ -117,18 +153,72 @@ const Profile = ({
                       )}
                     </section>
                   )}
-                  {/* <span className='positin-button-action-profile'>
+                  <section className='allbuttonprofile'>
+                    <div
+                      className={`${
+                        !friendsdis
+                          ? 'friendbutton'
+                          : 'friendbutton friendbuttonactive'
+                      }`}
+                      onClick={(e) => displaymyfriends(e)}
+                    >
+                      <FontAwesomeIcon icon={faUsers} />
+                      Friends
+                    </div>
+                    <div
+                      className={`${
+                        !displayexper
+                          ? 'friendbutton'
+                          : 'friendbutton friendbuttonactive'
+                      }`}
+                      onClick={(e) => displaymyexp(e)}
+                    >
+                      <FontAwesomeIcon icon={faUniversity} />
+                      Experience
+                    </div>
+                    <div
+                      className={`${
+                        !displayeduc
+                          ? 'friendbutton'
+                          : 'friendbutton friendbuttonactive'
+                      }`}
+                      onClick={(e) => displaymyeduca(e)}
+                    >
+                      <FontAwesomeIcon icon={faGraduationCap} />
+                      Education
+                    </div>
+                  </section>
+                  {friendsdis && (
+                    <Fragment>
+                      <div className='friendbox buttposition'>
+                        <Friend friends={friends} />
+                      </div>
+                    </Fragment>
+                  )}
+                  {displayexper && (
+                    <Fragment>
+                      <div className='buttposition'>
+                        <Experienceboc />
+                      </div>
+                    </Fragment>
+                  )}
+                  {displayeduc && (
+                    <Fragment>
+                      <div className='buttposition'>
+                        <Educationbox />
+                      </div>
+                    </Fragment>
+                  )}
+                </div>
+                {/* <span className='positin-button-action-profile'>
                     <DashboardActions />
                   </span> */}
-                </div>
-                <Experienceboc />
-              </section>
+              </div>
+              {/* <Experienceboc />
+              </section> */}
             </section>
           </header>
           <main>
-            <section className='friendbox'>
-              <Friend friends={friends} />
-            </section>
             <section>{/* <Roo m /> */}</section>
           </main>
         </Fragment>

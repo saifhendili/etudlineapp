@@ -14,6 +14,11 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  Online: {
+    type: Boolean,
+    default: false,
+  },
+
   password: {
     type: String,
     required: true,
@@ -33,6 +38,7 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+
 
   friends: {
     type: [

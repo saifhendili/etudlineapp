@@ -4,10 +4,10 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { GetOnline, newConnect } from '../../actions/friends';
 let socket;
-
-const MakeOnline = ({ user, GetOnline, newConnect, newconnect, online }) => {
+const MakeOnline = ({ user, GetOnline, newConnect, newconnect }) => {
   const ENDPOINT = 'localhost:5000';
-  const [messages, setMessages] = useState([]);
+  const [myOnline, setOnline] = useState([]);
+
   let i = 0;
 
   useEffect(() => {
@@ -21,13 +21,13 @@ const MakeOnline = ({ user, GetOnline, newConnect, newconnect, online }) => {
     socket.emit('Online', { friendid, room }, () => {});
   }, [ENDPOINT]);
   useEffect(() => {
-    socket.on('message', (message) => {
-      setMessages([...messages, message]);
+    socket.on('online', (message) => {
+      setOnline([...myOnline, message]);
     });
-    newConnect([...newconnect, ...messages]);
-  }, [messages]);
-
+    newConnect([...newconnect, ...myOnline]);
+  }, [myOnline, ENDPOINT]);
   console.log(newconnect);
+
   return <div></div>;
 };
 

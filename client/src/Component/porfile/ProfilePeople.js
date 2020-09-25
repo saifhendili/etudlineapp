@@ -1,13 +1,19 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import Educationbox from './Education';
+import Educationbox from './EducationFriend';
 import { connect } from 'react-redux';
-import Experienceboc from '../porfile/Experience';
+import Experienceboc from '../porfile/Experiencefriend';
 import SendRequest from './SendRequest';
 import DeleteFriend from './DeleteFriend';
 import AcceptFriend from '../notification/AcceptFriend';
+import SubEncad from '../Encadrement/Formaencadrement';
 
+import {
+  faUsers,
+  faUniversity,
+  faGraduationCap,
+} from '@fortawesome/free-solid-svg-icons';
 import RejectFriend from '../notification/RejectFriend';
 import Deletereq from './Deletereq';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,7 +53,26 @@ const PrifilePeople = ({
     GetSendreq(id);
     getreqfriend(id);
   }, [getProfileById, GetSendreq, getreqfriend, GetFriends]);
+  const [displayfriends, toggleSocialInputs] = useState({
+    displayexper: false,
+    displayeduc: false,
+  });
+  const { displayexper, displayeduc } = displayfriends;
 
+  const displaymyexp = (e) => {
+    toggleSocialInputs({
+      displayexper: !displayexper,
+      displayeduc: false,
+      friendsdis: false,
+    });
+  };
+  const displaymyeduca = (e) => {
+    toggleSocialInputs({
+      displayexper: false,
+      displayeduc: !displayeduc,
+      friendsdis: false,
+    });
+  };
   return (
     <Fragment>
       {profile === null || loading ? (
@@ -64,65 +89,72 @@ const PrifilePeople = ({
                 <img className='back-prof' src={img} />
 
                 <section className='myProfile'>
-                  <section className='header-row'>
-                    <Educationbox />
-                    <div className='pdpandname'>
-                      <img
-                        className='photo-de-profile'
-                        src={profile.user.avatar}
-                        alt
-                        logo
-                      />
+                  {/* <section className='header-row'>
+                    <Educationbox /> */}
+                  <div className='pdpandname'>
+                    <img
+                      className='photo-de-profile'
+                      src={profile.user.avatar}
+                      alt
+                      logo
+                    />
+
+                    <div className='info-here'>
                       <h3 className='myname'>
                         {profile.user.firstname} {profile.user.lastname}
                       </h3>
 
-                      {/* <h1>{_id}</h1> */}
-                      {/* <Fragment> */}
-                      <Fragment>
-                        {friendreqnotif.map((el, i) => (
-                          <div>
-                            {user._id == el.myuser ? (
-                              (sendfr = true)
-                            ) : (
-                              <Fragment></Fragment>
-                            )}
-                          </div>
-                        ))}
-                        {friends.map((friend, i) => (
-                          <div>
-                            {friend.user == id ? (
-                              (friendss = true)
-                            ) : (
-                              <Fragment></Fragment>
-                            )}
-                          </div>
-                        ))}
-                        =
-                        {sendrequest.map((el, i) => (
-                          <div>
-                            {el.user.includes(id) ? (
-                              (bool = true)
-                            ) : (
-                              <Fragment></Fragment>
-                            )}
-                          </div>
-                        ))}
-                        {friendss ? (
-                          <DeleteFriend id={id} />
-                        ) : sendfr ? (
-                          <div className='buttfredreq'>
-                            <AcceptFriend id={id} />
+                      <SubEncad id={id} />
+                      <h3 className='typeuserprofile'>
+                        {profile.user.typeuser.toUpperCase()}
+                      </h3>
 
-                            <RejectFriend id={id} />
-                          </div>
-                        ) : bool == false ? (
-                          <div className='buttpeoplprof'>
-                            <SendRequest id={id} />
-                          </div>
-                        ) : (
-                          <Deletereq id={id} />
-                        )}
+                      <Fragment>
+                        <div className='invitation-position'>
+                          {friendreqnotif.map((el, i) => (
+                            <div>
+                              {user._id == el.myuser ? (
+                                (sendfr = true)
+                              ) : (
+                                <Fragment></Fragment>
+                              )}
+                            </div>
+                          ))}
+                          {friends.map((friend, i) => (
+                            <div>
+                              {friend.user == id ? (
+                                (friendss = true)
+                              ) : (
+                                <Fragment></Fragment>
+                              )}
+                            </div>
+                          ))}
+
+                          {sendrequest.map((el, i) => (
+                            <div>
+                              {el.user.includes(id) ? (
+                                (bool = true)
+                              ) : (
+                                <Fragment></Fragment>
+                              )}
+                            </div>
+                          ))}
+                          {friendss ? (
+                            <DeleteFriend id={id} />
+                          ) : sendfr ? (
+                            <div className='buttfredreq'>
+                              <AcceptFriend id={id} />
+
+                              <RejectFriend id={id} />
+                            </div>
+                          ) : bool == false ? (
+                            <div className='buttpeoplprof'>
+                              <SendRequest id={id} />
+                            </div>
+                          ) : (
+                            <Deletereq id={id} />
+                          )}
+                        </div>
                       </Fragment>
 
                       {!profile.social ? (
@@ -187,12 +219,47 @@ const PrifilePeople = ({
                           )}
                         </section>
                       )}
-                      {/* <span className='positin-button-action-profile'>
-                    <DashboardActions />
-                  </span> */}
+                      <section className='allbuttonprofile'>
+                        <div
+                          className={`${
+                            !displayexper
+                              ? 'friendbutton'
+                              : 'friendbutton friendbuttonactive'
+                          }`}
+                          onClick={(e) => displaymyexp(e)}
+                        >
+                          <FontAwesomeIcon icon={faUniversity} />
+                          Experience
+                        </div>
+                        <div
+                          className={`${
+                            !displayeduc
+                              ? 'friendbutton'
+                              : 'friendbutton friendbuttonactive'
+                          }`}
+                          onClick={(e) => displaymyeduca(e)}
+                        >
+                          <FontAwesomeIcon icon={faGraduationCap} />
+                          Education
+                        </div>
+                      </section>
+
+                      {displayexper && (
+                        <Fragment>
+                          <div className='buttposition'>
+                            <Experienceboc />
+                          </div>
+                        </Fragment>
+                      )}
+                      {displayeduc && (
+                        <Fragment>
+                          <div className='buttposition'>
+                            <Educationbox />
+                          </div>
+                        </Fragment>
+                      )}
                     </div>
-                    <Experienceboc />
-                  </section>
+                  </div>
                 </section>
               </header>
               <main></main>

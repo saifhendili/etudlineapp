@@ -4,24 +4,26 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const PrivateRoute = ({
-  component: Component,    
-  auth: { isAuthenticated, loading },
+  component: Component,
+  auth: { isAuthenticated },
+
   ...rest
 }) => (
   <Route
     {...rest}
-    render={props =>
-      isAuthenticated ? <Component {...props} /> : <Redirect to="/login" />
+    render={(props) =>
+      isAuthenticated ? <Component {...props} /> : <Redirect to='/login' />
     }
   />
 );
 
 PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  admin: state.admin,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);

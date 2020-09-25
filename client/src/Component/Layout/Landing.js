@@ -5,11 +5,15 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 function Landing({ isAuthenticated }) {
-  if (isAuthenticated
-    ) return <Redirect to='dashboard' />;
+  if (isAuthenticated) return <Redirect to='dashboard' />;
   return (
     <div className='homecontainer'>
-      <img className='backgroundimage' src={pic} width='100%' alt='background img'/>
+      <img
+        className='backgroundimage'
+        src={pic}
+        width='100%'
+        alt='background img'
+      />
       <p className='textcontainer'>
         Create a profile, share posts and get help from other instructor
       </p>
@@ -23,6 +27,7 @@ function Landing({ isAuthenticated }) {
           <button className='boutton-log login'>Login</button>
         </Link>
       </div>
+      
     </div>
   );
 }

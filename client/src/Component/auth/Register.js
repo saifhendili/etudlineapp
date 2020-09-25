@@ -103,6 +103,9 @@ function Register({ SetAlert, register, isAuthenticated }) {
             value={password2}
             onChange={(e) => hundelchange(e)}
           />
+          <label>
+            <p className='paragraphe-create-pro'>Date de naissance</p>
+          </label>
           <input
             className='birthday'
             type='date'

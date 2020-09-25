@@ -14,23 +14,15 @@ const { check, validationResult } = require('express-validator');
 router.post(
   '/',
   [
-    check('firstname', 'firstname is required')
-      .not()
-      .isEmpty(),
-    check('lastname', 'lastname is required')
-      .not()
-      .isEmpty(),
-    check('typeuser', 'type of user is required')
-      .not()
-      .isEmpty(),
-    check('birthday', 'date of birthday is required')
-      .not()
-      .isEmpty(),
+    check('firstname', 'firstname is required').not().isEmpty(),
+    check('lastname', 'lastname is required').not().isEmpty(),
+    check('typeuser', 'type of user is required').not().isEmpty(),
+    check('birthday', 'date of birthday is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
       'Please enter a password with 6 or more characters'
-    ).isLength({ min: 6 })
+    ).isLength({ min: 6 }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -43,7 +35,7 @@ router.post(
       typeuser,
       email,
       birthday,
-      password
+      password,
     } = req.body;
     try {
       let user = await User.findOne({ email });
@@ -55,7 +47,7 @@ router.post(
       const avatar = gravatar.url(email, {
         s: '200',
         r: 'pg',
-        d: 'mm'
+        d: 'mm',
       });
       user = new User({
         firstname,
@@ -64,7 +56,7 @@ router.post(
         avatar,
         typeuser,
         birthday,
-        password
+        password,
       });
       const salt = await bcrypt.genSalt(10);
 
@@ -72,8 +64,8 @@ router.post(
       await user.save();
       const payload = {
         user: {
-          id: user.id
-        }
+          id: user.id,
+        },
       };
 
       jwt.sign(

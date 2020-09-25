@@ -9,9 +9,22 @@ import {
   LOGIN_FAIL,
   CLEAR_PROFILE,
   LOGOUT,
-
+  SET_ONLINE,
+  SET_OFLINE,
 } from './Types';
 import setAuthToken from '../utils/setAuthToken';
+
+export const setONline = () => async (dispatch) => {
+  try {
+    const res = await axios.put('/api/friends/setonline/');
+    dispatch({
+      type: SET_ONLINE,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -22,6 +35,7 @@ export const loadUser = () => async (dispatch) => {
       type: USER_LOADED,
       payload: res.data,
     });
+    dispatch(setONline());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
@@ -107,4 +121,18 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
+};
+
+export const setofline = () => async (dispatch) => {
+  // dispatch({ type: CLEAR_PROFILE });
+
+  try {
+    const res = await axios.put('/api/friends/setofline/');
+    dispatch({
+      type: SET_OFLINE,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };

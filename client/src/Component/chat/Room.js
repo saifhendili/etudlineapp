@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import GetYourMessages from './GetYourMessages';
 import io from 'socket.io-client';
@@ -8,9 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 let socket;
-const Room = ({ location, messages }) => {
+const Room = ({ location }) => {
   const [message, setMessage] = useState('');
-  const [mymessages, setMessages] = useState([]);
   const ENDPOINT = 'localhost:5000';
   const { fname, lname, name, room, friendid } = queryString.parse(
     location.search
@@ -20,12 +18,6 @@ const Room = ({ location, messages }) => {
     socket.emit('join', { name, room }, () => {});
   }, [ENDPOINT, location.search]);
 
-  useEffect(() => {
-    socket.on('message', (message) => {
-      setMessages([...mymessages, message]);
-    });
-  }, [mymessages, ENDPOINT]);
-  // console.log(mymessages);
   const sendMessage = async (e) => {
     await e.preventDefault();
     if (message) {
@@ -40,12 +32,7 @@ const Room = ({ location, messages }) => {
           {fname} {lname}
         </h2>
       </div>
-      <GetYourMessages
-        friendid={friendid}
-        mymessages={mymessages}
-        myid={name}
-        roomm={room}
-      />
+      <GetYourMessages friendid={friendid} myid={name} roomm={room} />
       <div className='inputsendcontainer'>
         <input
           type='text'
@@ -60,7 +47,7 @@ const Room = ({ location, messages }) => {
   );
 };
 
-Room.propTypes = {};
+
 const mapStateToProps = (state) => ({
   messages: state.chat.messages,
 });
